@@ -1,9 +1,16 @@
 
 lexer grammar MylaLexer;
 
-fragment DIGIT : ('0'..'9') ;
-
 UINT : DIGIT+ ;
+
+fragment DIGIT : ('0'..'9') ;
 
 // whitespace
 WHITESPACE : (' ' | '\n' | '\r' | '\t' | '\f' ) -> skip ;
+
+NEG : '-'  ;
+
+MUL : '*'  ;
+DIV : '/'  ;
+MOD : '%'  ;
+PLUS: '+'  ;
