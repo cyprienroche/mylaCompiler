@@ -1,4 +1,3 @@
-# mylaCompiler
-Compiler for the Myla language
+# Compiler for the Myla language
 
 # In progress
