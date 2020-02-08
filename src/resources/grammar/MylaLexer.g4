@@ -3,4 +3,7 @@ lexer grammar MylaLexer;
 
 fragment DIGIT : ('0'..'9') ;
 
-INTEGER : DIGIT+ ;
+UINT : DIGIT+ ;
+
+// whitespace
+WHITESPACE : (' ' | '\t' | '\n' | '\f' | '\r' ) -> skip ;

@@ -6,4 +6,4 @@ options {
 }
 
 // program
-prog : INTEGER* EOF ;
+prog : UINT* EOF ;
