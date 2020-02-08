@@ -5,14 +5,14 @@ PARSER_FILE=MylaParser.g4
 
 BASEDIR=$(dirname $0)
 
-ANTLR_JAR=$BASEDIR/../../../lib/antlr-4.7-complete.jar
+ANTLR_JAR=$BASEDIR/../../../lib/antlr-4.8-complete.jar
 
 TARGET_DIR=$BASEDIR/../../java/myla/antlr
 
 rm -rf $TARGET_DIR
 
 echo Compiling the lexer..
-java -jar $ANTLR_JAR $BASEDIR/$LEXER_FILE -o $TARGET_DIR -package antlr -no-listener -visitor -Werror 
+java -jar $ANTLR_JAR $BASEDIR/$LEXER_FILE -o $TARGET_DIR -no-listener -visitor -Werror 
 
 if [ $? -ne 0 ]
 then 
@@ -20,5 +20,5 @@ then
 fi
 
 echo Compiling the parser..
-java -jar $ANTLR_JAR $BASEDIR/$PARSER_FILE -o $TARGET_DIR -package antlr -no-listener -visitor -Werror
+java -jar $ANTLR_JAR $BASEDIR/$PARSER_FILE -o $TARGET_DIR -no-listener -visitor -Werror
 

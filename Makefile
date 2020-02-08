@@ -29,6 +29,6 @@ rules:
 	$(RM) rules
 
 clean:
-	$(RM) rules $(OUTPUT_DIR) $(SOURCE_DIR)
+	$(RM) $(OUTPUT_DIR)
 
 .PHONY: all rules clean
