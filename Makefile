@@ -3,7 +3,7 @@
 
 ANTLR_DIR	:= src/resources/grammar
 SOURCE_DIR	:= src
-OUTPUT_DIR	:= bin 
+OUTPUT_DIR	:= src/resources/grammar/bin
 
 # Tools
 
@@ -14,7 +14,7 @@ MKDIR	:= mkdir -p
 JAVA	:= java
 JAVAC	:= javac
 
-JFLAGS	:= -sourcepath $(SOURCE_DIR) -d $(OUTPUT_DIR) -cp lib/antlr-4.7-complete.jar 
+JFLAGS	:= -sourcepath $(SOURCE_DIR) -d $(OUTPUT_DIR) -cp lib/antlr-4.7-complete.jar
 
 # the make rules
 
@@ -22,14 +22,13 @@ all: rules
 
 # runs the antlr build script then attempts to compile all .java files within src
 rules:
-	cd $(ANTLR_DIR) && ./$(ANTLR) 
+	cd $(ANTLR_DIR) && ./$(ANTLR)
 	$(FIND) $(SOURCE_DIR) -name '*.java' > $@
 	$(MKDIR) $(OUTPUT_DIR)
 	$(JAVAC) $(JFLAGS) @$@
 	$(RM) rules
 
 clean:
-	$(RM) rules $(OUTPUT_DIR) $(SOURCE_DIR)/antlr
+	$(RM) rules $(OUTPUT_DIR) $(SOURCE_DIR)
 
 .PHONY: all rules clean
-
