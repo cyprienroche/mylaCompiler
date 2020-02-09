@@ -3,15 +3,14 @@ lexer grammar MylaLexer;
 
 NAT : [0-9]+ ;
 
-// whitespace
-WHITESPACE : [ \n\r\t\f] -> skip ;
-
-NEG  : '-'  ;
-
 MUL  : '*' ;
 DIV  : '/' ;
 MOD  : '%' ;
 PLUS : '+' ;
+NEG  : '-' ;
 
 OPENPAR  : '(' ;
 CLOSEPAR : ')' ;
+
+// whitespace
+WHITESPACE : [ \n\r\t\f] -> skip ;

@@ -9,10 +9,10 @@ options {
 prog : expr* EOF ;
 
 // expressions
-expr: expr mdmBinop expr
-    | expr pnBinop  expr
+expr: literal
     | OPENPAR expr CLOSEPAR
-    | literal
+    | expr mdmBinop expr
+    | expr pnBinop  expr
     ;
 
 mdmBinop  : MUL | DIV | MOD ;
