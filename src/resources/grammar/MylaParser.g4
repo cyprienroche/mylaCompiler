@@ -8,13 +8,14 @@ options {
 // program
 prog : expr* EOF ;
 
-// statements
-expr: literal
-    | expr mulBinop expr
-    | expr addBinop expr
+// expressions
+expr: expr mdmBinop expr
+    | expr pnBinop  expr
+    | OPENPAR expr CLOSEPAR
+    | literal
     ;
 
-mulBinop  : MUL | DIV | MOD ;
-addBinop  : PLUS | NEG      ;
+mdmBinop  : MUL | DIV | MOD ;
+pnBinop   : PLUS | NEG      ;
 
-literal : ( PLUS | NEG )? UINT ;
+literal : ( PLUS | NEG )? NAT ;
