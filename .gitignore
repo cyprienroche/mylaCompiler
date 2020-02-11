@@ -1,6 +1,6 @@
 #ignore generated binary files and auto-generated ANTLR code
 bin
-src/java/myla/antlr
+src/main/java/wacc/antlr
 
 #ignore intelliJ generated files
 *.iml

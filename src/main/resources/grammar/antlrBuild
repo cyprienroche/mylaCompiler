@@ -5,7 +5,7 @@ PARSER_FILE=MylaParser.g4
 
 BASEDIR=$(dirname $0)
 
-ANTLR_JAR=$BASEDIR/../../../lib/antlr-4.8-complete.jar
+ANTLR_JAR=$BASEDIR/../../../../lib/antlr-4.8-complete.jar
 
 TARGET_DIR=$BASEDIR/../../java/myla/antlr
 
