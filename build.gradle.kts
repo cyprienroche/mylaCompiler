@@ -33,12 +33,7 @@ val test: Test by tasks
 test.testLogging.setEvents(setOf("PASSED", "FAILED", "SKIPPED"))
 
 val compileKotlin: KotlinCompile by tasks
-val compileTestKotlin: KotlinCompile by tasks
-
 compileKotlin.kotlinOptions {
-    jvmTarget = "11"
-}
-compileTestKotlin.kotlinOptions {
     jvmTarget = "11"
 }
 
