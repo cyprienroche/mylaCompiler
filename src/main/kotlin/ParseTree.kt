@@ -9,4 +9,6 @@ class ParseTree(path: String) {
     private val parser = MylaParser(tokens)
 
     fun getTree(): ParseTree = parser.prog()
+
+    override fun toString(): String = getTree().toStringTree(parser)
 }
