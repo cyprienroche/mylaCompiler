@@ -1,9 +1,9 @@
 # Sample Makefile for the WACC Compiler lab: edit this to build your own comiler
 # Locations
 
-ANTLR_DIR	:= src/main/resources/grammar
+ANTLR_DIR	:= src/main/antlr
 SOURCE_DIR	:= src
-OUTPUT_DIR	:= src/main/resources/grammar/bin
+OUTPUT_DIR	:= src/main/antlr/bin
 
 # Tools
 
