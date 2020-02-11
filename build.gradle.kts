@@ -39,11 +39,3 @@ tasks.generateGrammarSource {
     maxHeapSize = "64m"
     arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages")
 }
-
-
-
-// clean {
-//     doFirst {
-//         delete "${rootDir}/src/main/java/wacc/antlr"
-//     }
-// }
