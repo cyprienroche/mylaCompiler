@@ -4,6 +4,7 @@ apply plugin: 'java'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+description = """Myla Compiler"""
 
 sourceCompatibility = 1.11
 
