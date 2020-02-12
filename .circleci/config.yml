@@ -5,6 +5,10 @@
 version: 2
 jobs:
   build:
+    filters:  # using regex filters requires the entire branch to match
+      branches:
+        only:  # only branches matching the below regex filters will run
+          - master
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:11-jdk
