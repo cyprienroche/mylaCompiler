@@ -34,9 +34,15 @@ test.testLogging.setEvents(setOf("PASSED", "FAILED", "SKIPPED"))
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
+compileKotlin.dependsOn(tasks.generateGrammarSource)
+
+val genjavaAntlr = "src/main/java/generated"
 
 tasks.generateGrammarSource {
     maxHeapSize = "64m"
-    arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages")
-    outputDirectory = File("src/main/java/antlr")
+    outputDirectory = File(genjavaAntlr)
+    arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages", "-package", "generated")
 }
+
+val clean: Delete by tasks
+clean.delete(genjavaAntlr)
