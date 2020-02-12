@@ -1,1 +1,1 @@
-rootProject.name = "myla"
+rootProject.name = "mylaCompiler"
