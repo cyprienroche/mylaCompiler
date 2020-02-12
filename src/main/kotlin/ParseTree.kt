@@ -1,7 +1,5 @@
-
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.tree.ParseTree
 
 class ParseTree(path: String) {
     private val lexer = MylaLexer(CharStreams.fromFileName(path))
@@ -10,5 +8,5 @@ class ParseTree(path: String) {
 
     fun getTree(): ParseTree = parser.prog()
 
-    override fun toString(): String = getTree().toStringTree(parser)
+    override fun toString(): String = "hi" /*getTree().toStringTree(parser)*/
 }

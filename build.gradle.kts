@@ -33,11 +33,10 @@ val test: Test by tasks
 test.testLogging.setEvents(setOf("PASSED", "FAILED", "SKIPPED"))
 
 val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "11"
-}
+compileKotlin.kotlinOptions.jvmTarget = "11"
 
 tasks.generateGrammarSource {
     maxHeapSize = "64m"
     arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages")
+    outputDirectory = File("src/main/java/antlr")
 }
