@@ -5,14 +5,20 @@
  version: 2
  jobs:
    build:
+     machine:
+       image: circleci/classic:latest
      steps:
        - checkout
        - run: ./gradlew assemble
    test:
+     machine:
+       image: circleci/classic:latest
      steps:
        - checkout
        - run: ./gradlew test
    checkstyle:
+     machine:
+       image: circleci/classic:latest
      steps:
        - checkout
        - run: ./gradlew lintKotlinTest
