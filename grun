@@ -2,4 +2,4 @@
 
 echo running the ANTLR TestRig grammar tool
 # shellcheck disable=SC2068
-java -cp build/classes/java/main:lib/antlr-4.8-complete.jar org.antlr.v4.gui.TestRig $@
+echo under implementation, no compiler just yet!
