@@ -5,23 +5,23 @@
  version: 2
  jobs:
    build:
-     machine:
-       image: circleci/classic:latest
+     docker:
+       - image: circleci/openjdk:11-jdk
      steps:
        - checkout
-       - run: ./gradlew assemble
+       - run: gradle assemble
    test:
-     machine:
-       image: circleci/classic:latest
+     docker:
+       - image: circleci/openjdk:11-jdk
      steps:
        - checkout
-       - run: ./gradlew test
+       - run: gradle test
    checkstyle:
-     machine:
-       image: circleci/classic:latest
+     docker:
+       - image: circleci/openjdk:11-jdk
      steps:
        - checkout
-       - run: ./gradlew lintKotlinTest
+       - run: gradle lintKotlinTest
        
  workflows:
    version: 2
