@@ -9,6 +9,8 @@
        branches:
          only:
            - master
+     steps:
+       - echo branch is master
    build:
      docker:
        - image: circleci/openjdk:11-jdk
