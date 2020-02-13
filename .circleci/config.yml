@@ -17,3 +17,10 @@ jobs:
     steps:
       - checkout
       - run: gradle test
+
+workflows:
+  version: 2
+    one_and_two:
+      jobs:
+        - dependencies
+        - test
