@@ -10,7 +10,8 @@
          only:
            - master
      steps:
-       - run: echo "branch is master"
+       - run: 
+           command: echo "branch is master"
    build:
      docker:
        - image: circleci/openjdk:11-jdk
