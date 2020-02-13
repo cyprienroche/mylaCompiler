@@ -7,15 +7,15 @@
    build:
      steps:
        - checkout
-       - run: gradle assemble
+       - run: ./gradlew assemble
    test:
      steps:
        - checkout
-       - run: gradle test
+       - run: ./gradlew test
    checkstyle:
      steps:
        - checkout
-       - run: gradle lintKotlinTest
+       - run: ./gradlew lintKotlinTest
        
  workflows:
    version: 2
