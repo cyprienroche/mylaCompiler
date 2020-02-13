@@ -4,13 +4,13 @@
 #
  version: 2
  jobs:
-   one:
+   dependencies:
      docker:
        - image: circleci/openjdk:11-jdk
      steps:
        - checkout
        - run: gradle dependencies
-   two:
+   test:
      docker:
        - image: circleci/openjdk:11-jdk
      steps:
@@ -20,5 +20,5 @@
    version: 2
    one_and_two:
      jobs:
-       - one
-       - two
+       - dependencies
+       - test
