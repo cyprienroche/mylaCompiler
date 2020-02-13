@@ -9,9 +9,11 @@
        branches:
          only:
            - master
+     docker: 
+       - image: circleci/node:4.8.2
      steps:
-       - run: 
-           command: echo "branch is master"
+       - checkout
+       - run: echo "branch is master" 
    build:
      docker:
        - image: circleci/openjdk:11-jdk
