@@ -18,7 +18,7 @@
        - run: gradle test
  workflows:
    version: 2
-   one_and_two:
+   gradle_checks:
      jobs:
        - dependencies
        - test
