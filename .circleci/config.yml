@@ -1,13 +1,14 @@
 # Gradle CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
-#
+#          
  version: 2
  jobs:
    branch:
-     branches:
-       only:
-         - master
+     filters:
+       branches:
+         only:
+           - master
    build:
      docker:
        - image: circleci/openjdk:11-jdk
