@@ -18,11 +18,11 @@
        - run: gradle test
  workflows:
    version: 2
-     filters:  # using regex filters requires the entire branch to match
-       branches:
-         only:  # only branches matching the below regex filters will run
-           - master
    gradle_checks:
+     filters:
+       branches:
+         only:
+           - master
      jobs:
        - dependencies
        - test
