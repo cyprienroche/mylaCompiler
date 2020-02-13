@@ -36,13 +36,13 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 compileKotlin.dependsOn(tasks.generateGrammarSource)
 
-val genjavaAntlr = "src/main/java/generated"
+val generatedjavaFolder = "src/main/java/generated"
 
 tasks.generateGrammarSource {
     maxHeapSize = "64m"
-    outputDirectory = File(genjavaAntlr)
+    outputDirectory = File(generatedjavaFolder)
     arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages", "-package", "generated")
 }
 
 val clean: Delete by tasks
-clean.delete(genjavaAntlr)
+clean.delete(generatedjavaFolder)
