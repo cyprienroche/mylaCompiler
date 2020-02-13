@@ -4,6 +4,10 @@
 #
  version: 2
  jobs:
+   branch:
+     branches:
+       only:
+         - master
    build:
      docker:
        - image: circleci/openjdk:11-jdk
@@ -27,7 +31,10 @@
    version: 2
    build-test-checkstyle:
      jobs:
-       - build
+       - branch
+       - build:
+           requires:
+             - branch
        - test:
            requires:
              - build
