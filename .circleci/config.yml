@@ -2,25 +2,25 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
-jobs:
-  dependencies:
-    docker:
-      - image: circleci/openjdk:11-jdk
-    steps:
-      - checkout
-      - run: gradle dependencies
-  
-  test:
-    docker:
-      - image: circleci/openjdk:11-jdk
-    steps:
-      - checkout
-      - run: gradle test
-
-workflows:
-  version: 2
-    dependencies_and_test:
-      jobs:
-        - dependencies
-        - test
+ version: 2
+ jobs:
+   one:
+     docker:
+       - image: circleci/ruby:2.4.1
+     steps:
+       - checkout
+       - run: echo "A first hello"
+       - run: sleep 25
+   two:
+     docker:
+       - image: circleci/ruby:2.4.1
+     steps:
+       - checkout
+       - run: echo "A more familiar hi"
+       - run: sleep 15
+ workflows:
+   version: 2
+   one_and_two:
+     jobs:
+       - one
+       - two
