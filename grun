@@ -1,5 +1,0 @@
-#!/bin/sh
-
-echo running the ANTLR TestRig grammar tool
-# shellcheck disable=SC2068
-echo under implementation, no compiler just yet!

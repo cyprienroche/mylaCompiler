@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+cmd = "build/install/mylaCompiler/bin/mylaCompiler"
+
+ARGV.each do|a|
+    cmd << " #{a}"
+end
+
+exec "#{cmd}"
+
