@@ -1,3 +1,5 @@
+package frontend
+
 import generated.MylaLexer
 import generated.MylaParser
 import org.antlr.v4.runtime.CharStreams
