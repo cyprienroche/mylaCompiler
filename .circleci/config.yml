@@ -4,16 +4,6 @@
 #          
  version: 2
  jobs:
-   branch:
-     filters:
-       branches:
-         only:
-           - master
-     docker: 
-       - image: circleci/node:4.8.2
-     steps:
-       - checkout
-       - run: echo "branch is master" 
    build:
      docker:
        - image: circleci/openjdk:11-jdk
@@ -43,10 +33,7 @@
    version: 2
    build-test-checkstyle:
      jobs:
-       - branch
-       - build:
-           requires:
-             - branch
+       - build
        - test:
            requires:
              - build
