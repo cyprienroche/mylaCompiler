@@ -1,6 +1,5 @@
-package src.test.kotlin
+package frontend
 
-import ParseTree
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
