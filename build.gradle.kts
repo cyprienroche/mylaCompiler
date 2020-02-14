@@ -5,17 +5,25 @@ plugins {
     kotlin("jvm") version "1.3.61"
     id("org.jmailen.kotlinter") version "2.3.0"
     antlr
+    application
+    distribution
 }
 
 group = "Roche"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 description = """Myla Compiler"""
+application.mainClassName = "MainKt"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
 
+tasks.jar {
+    manifest.attributes(mapOf("Implementation-Title" to project.name, "Implementation-Version" to project.version))
+}
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
