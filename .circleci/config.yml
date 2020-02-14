@@ -32,6 +32,12 @@
      steps:
        - checkout
        - run: gradle lintKotlinTest
+    install:
+      docker:
+        - image: circleci/openjdk:11-jdk
+      steps:
+        - checkout
+        - run: gradle installDist
        
  workflows:
    version: 2
@@ -46,4 +52,8 @@
              - build
        - checkstyle:
            requires:
-               - test
+               - build
+       - install:
+           requires:
+             - test
+             - checkstyle
