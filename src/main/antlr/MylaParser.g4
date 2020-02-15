@@ -15,9 +15,9 @@ stat : expr
 
 // expressions
 expr : literal
-     | OPENPAR expr CLOSEPAR
      | expr mdmBinop expr
      | expr pnBinop  expr
+     | OPENPAR expr CLOSEPAR
      ;
 
 mdmBinop  : MUL | DIV | MOD ;
