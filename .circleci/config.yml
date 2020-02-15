@@ -41,7 +41,7 @@
        
  workflows:
    version: 2
-   build-test-checkstyle:
+   build-test-style-install:
      jobs:
        - branch
        - build:
