@@ -26,7 +26,7 @@ class ParseTreeGenTest {
     }
 
     @Test
-    fun wrong() {
+    fun malformedProgramsAddErrorsToListener() {
         val parseTree = ParseTreeGen(
             "src/test/resources/invlid.myla", listener
         )
