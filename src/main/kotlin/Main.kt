@@ -10,6 +10,7 @@ fun main() {
     if (errorListener.errors.isNotEmpty()) {
         print(errorListener)
         println("${errorListener.errors.size} parser error(s) detected, no further compilation attempted.")
+        return
     }
     println(tree.toStringTree())
 }
