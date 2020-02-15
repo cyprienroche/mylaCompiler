@@ -1,20 +1,24 @@
 package frontend
 
+import com.nhaarman.mockitokotlin2.mock
+import org.antlr.v4.runtime.ANTLRErrorListener
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
 
-class ParseTreeTest {
+class ParseTreeGenTest {
+
+    val listener = mock<ANTLRErrorListener> {}
 
     @Test
-    fun getCorrectParseTreeForIntegerLiteralOnly() {
-        val parseTree = ParseTree("src/test/resources/int.myla")
-        assertThat(parseTree.toString(), `is`("(prog (stat (expr (literal 1))) <EOF>)"))
+    fun getCorrectParseTreeForIntegerLiteral() {
+        val parseTree = ParseTreeGen("src/test/resources/int.myla", listener)
+        assertThat(parseTree.parseTreeString(), `is`("(prog (stat (expr (literal 1))) <EOF>)"))
     }
 
     @Test
     fun getCorrectParseTreeForIntegerAssignment() {
-        val parseTree = ParseTree("src/test/resources/assign.myla")
-        assertThat(parseTree.toString(), `is`("(prog (stat (identifier x) = (expr (literal 73))) <EOF>)"))
+        val parseTree = ParseTreeGen("src/test/resources/assign.myla", listener)
+        assertThat(parseTree.parseTreeString(), `is`("(prog (stat (identifier x) = (expr (literal 73))) <EOF>)"))
     }
 }
