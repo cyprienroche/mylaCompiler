@@ -20,7 +20,7 @@ class MylaErrorListener : BaseErrorListener() {
         errors.add(err)
     }
 
-    override fun toString(): String = errors.fold("", { acc, item -> acc + '\n' + item })
+    override fun toString(): String = errors.fold("", { acc, item -> acc + item + '\n' })
 }
 
 data class SyntaxError(val position: Pair<Int, Int>, val msg: String) {
