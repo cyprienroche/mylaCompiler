@@ -1,19 +1,15 @@
-import frontend.ParseTree
+import frontend.ParseTreeGen
 import frontend.errors.MylaErrorListener
 
 fun main() {
     val path = "src/main/resources/Example.myla"
-    val lexerListener = MylaErrorListener()
-    val parserListener = MylaErrorListener()
+    val errorListener = MylaErrorListener()
 
-    val parseTree = ParseTree(path, lexerListener, parserListener)
-    val tree = parseTree.getParseTree()
+    val tree = ParseTreeGen(path, errorListener).parseTree()
 
-    if (lexerListener.errors.isNotEmpty() || parserListener.errors.isNotEmpty()) {
-        lexerListener.errors.forEach { println(it) }
-        parserListener.errors.forEach { println(it) }
-        println("${parserListener.errors.size} parser error(s) detected, no further compilation attempted.")
-        return
+    if (errorListener.errors.isNotEmpty()) {
+        print(errorListener)
+        println("${errorListener.errors.size} parser error(s) detected, no further compilation attempted.")
     }
-    println(parseTree.toString())
+    println(tree.toStringTree())
 }
