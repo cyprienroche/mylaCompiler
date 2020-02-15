@@ -3,7 +3,13 @@ lexer grammar MylaLexer;
 
 NAT : [0-9]+ ;
 
+// whitespace
+WHITESPACE : [ \n\r\t\f] -> skip ;
+
 NEG  : '-' ;
+
+// identifiers
+IDENT : [_a-zA-Z] [_a-zA-Z0-9]* ;
 
 MUL  : '*' ;
 DIV  : '/' ;
@@ -12,12 +18,6 @@ PLUS : '+' ;
 
 OPENPAR  : '(' ;
 CLOSEPAR : ')' ;
-
-// whitespace
-WHITESPACE : [ \n\r\t\f] -> skip ;
-
-// identifiers
-IDENT : [_a-zA-Z] [_a-zA-Z0-9]* ;
 
 // assignments
 ASSIGN : '=' ;
