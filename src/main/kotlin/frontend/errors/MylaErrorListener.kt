@@ -6,23 +6,23 @@ import org.antlr.v4.runtime.Recognizer
 
 class MylaErrorListener : BaseErrorListener() {
 
-    val errors = mutableListOf<MError>()
+  val errors = mutableListOf<SyntaxError>()
 
-    override fun syntaxError(
-        recognizer: Recognizer<*, *>?,
-        offendingSymbol: Any?,
-        line: Int,
-        charPositionInLine: Int,
-        msg: String?,
-        e: RecognitionException?
-    ) {
-        val err = MError(line to charPositionInLine, msg.toString())
-        errors.add(err)
-    }
+  override fun syntaxError(
+    recognizer: Recognizer<*, *>?,
+    offendingSymbol: Any?,
+    line: Int,
+    charPositionInLine: Int,
+    msg: String?,
+    e: RecognitionException?
+  ) {
+    val err = SyntaxError(line to charPositionInLine, msg.toString())
+    errors.add(err)
+  }
+
+  override fun toString(): String = errors.fold("", { acc, item -> acc + '\n' + item })
 }
 
-data class MError(val position: Pair<Int, Int>, val msg: String) {
-    override fun toString(): String {
-        return "Syntactic Error at ${position.first}:${position.second} -- $msg"
-    }
+data class SyntaxError(val position: Pair<Int, Int>, val msg: String) {
+  override fun toString(): String = "Syntactic Error at ${position.first}:${position.second} -- $msg"
 }

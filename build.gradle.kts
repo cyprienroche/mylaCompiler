@@ -34,10 +34,6 @@ dependencies {
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
-kotlinter {
-    indentSize = 2
-}
-
 val test: Test by tasks
 test.testLogging.setEvents(setOf("PASSED", "FAILED", "SKIPPED"))
 
