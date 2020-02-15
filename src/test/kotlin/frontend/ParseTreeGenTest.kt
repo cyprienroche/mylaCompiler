@@ -8,7 +8,7 @@ import org.junit.Test
 
 class ParseTreeGenTest {
 
-    val listener = mock<ANTLRErrorListener> {}
+    private val listener = mock<ANTLRErrorListener> {}
 
     @Test
     fun getCorrectParseTreeForIntegerLiteral() {
