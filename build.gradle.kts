@@ -31,10 +31,7 @@ dependencies {
     antlr("org.antlr:antlr4:4.8")
     testImplementation("junit:junit:4.12")
     testImplementation("org.hamcrest:hamcrest-all:1.3")
-}
-
-kotlinter {
-    indentSize = 2
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
 val test: Test by tasks
