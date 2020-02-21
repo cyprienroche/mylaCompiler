@@ -4,6 +4,9 @@
 #          
  version: 2.0
  defaults: &defaults
+   working_directory: ~/repo
+   docker:
+     - image: circleci/openjdk:11-jdk
  jobs:
    build:
      docker:
