@@ -2,4 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/cyprienroche/mylaCompiler.svg?style=svg)](https://circleci.com/gh/cyprienroche/mylaCompiler)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/0ea1df021f376dfc15a0/maintainability)](https://codeclimate.com/github/cyprienroche/mylaCompiler/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0ea1df021f376dfc15a0/test_coverage)](https://codeclimate.com/github/cyprienroche/mylaCompiler/test_coverage)
+
 ### In progress
