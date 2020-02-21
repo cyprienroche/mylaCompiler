@@ -9,18 +9,22 @@
      - image: circleci/openjdk:11-jdk
  jobs:
    build:
+     <<: *defaults
      steps:
        - checkout
        - run: gradle assemble
    test:
+     <<: *defaults
      steps:
        - checkout
        - run: gradle test
    checkstyle:
+     <<: *defaults
      steps:
        - checkout
        - run: gradle lintKotlinTest
    install:
+     <<: *defaults
      steps:
        - checkout
        - run: gradle installDist
