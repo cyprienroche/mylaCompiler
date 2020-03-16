@@ -4,15 +4,21 @@ src/main/java/
 
 #ignore intelliJ generated files
 *.iml
-.idea/
-out/
+.idea
+out
 
 #ignore gradle generated files
-.gradle/
-build/
+.gradle
+build
 
 #ignore Java class files
 *.class
 
 #ignore junk macOS generated files
 .DS_Store
+
+target
+*.ipr
+.classpath
+.settings
+.project

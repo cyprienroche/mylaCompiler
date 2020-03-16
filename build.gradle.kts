@@ -4,6 +4,7 @@ plugins {
     java
     kotlin("jvm") version "1.3.61"
     id("org.jmailen.kotlinter") version "2.3.0"
+    jacoco
     antlr
     application
     distribution
@@ -41,6 +42,8 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 compileKotlin.dependsOn(tasks.generateGrammarSource)
 
+
+// ANTLR configuration
 val generatedjavaFolder = "src/main/java/generated"
 
 tasks.generateGrammarSource {
@@ -51,3 +54,31 @@ tasks.generateGrammarSource {
 
 val clean: Delete by tasks
 clean.delete(generatedjavaFolder)
+
+
+//Jacoco configuration
+jacoco.toolVersion = "0.8.5"
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = false
+        csv.isEnabled = false
+        html.destination = file("${buildDir}/reports/coverage")
+    }
+}
+
+tasks.withType<JacocoReport> {
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("generated")
+        }
+    )
+}
+
+tasks.test {
+    finalizedBy("jacocoTestReport")
+    doLast {
+        println("View code coverage at:")
+        println("file://$buildDir/reports/coverage/index.html")
+    }
+}
