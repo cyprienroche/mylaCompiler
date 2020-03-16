@@ -55,7 +55,9 @@ val clean: Delete by tasks
 clean.delete(generatedjavaFolder)
 
 // Jacoco configuration
-jacoco.toolVersion = "0.8.5"
+jacoco {
+    toolVersion = "0.8.5"
+}
 
 tasks.jacocoTestReport {
     reports {
@@ -78,5 +80,17 @@ tasks.test {
     doLast {
         println("View code coverage at:")
         println("file://$buildDir/reports/coverage/index.html")
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = "CLASS"
+            excludes = listOf("generated.*")
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
     }
 }
