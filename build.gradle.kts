@@ -42,7 +42,6 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 compileKotlin.dependsOn(tasks.generateGrammarSource)
 
-
 // ANTLR configuration
 val generatedjavaFolder = "src/main/java/generated"
 
@@ -55,15 +54,14 @@ tasks.generateGrammarSource {
 val clean: Delete by tasks
 clean.delete(generatedjavaFolder)
 
-
-//Jacoco configuration
+// Jacoco configuration
 jacoco.toolVersion = "0.8.5"
 
 tasks.jacocoTestReport {
     reports {
         xml.isEnabled = false
         csv.isEnabled = false
-        html.destination = file("${buildDir}/reports/coverage")
+        html.destination = file("$buildDir/reports/coverage")
     }
 }
 
