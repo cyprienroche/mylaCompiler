@@ -59,11 +59,22 @@ jacoco {
     toolVersion = "0.8.5"
 }
 
+tasks.test {
+    finalizedBy("jacocoTestReport")
+    doLast {
+        println("View code coverage at:")
+        // println("file://$buildDir/reports/coverage/index.html")
+        println("file://$buildDir/reports/jacoco/test/html/index.html")
+    }
+}
+
 tasks.jacocoTestReport {
     reports {
-        xml.isEnabled = false
-        csv.isEnabled = false
-        html.destination = file("$buildDir/reports/coverage")
+        csv.isEnabled = true
+        xml.isEnabled = true
+        html.isEnabled = true
+        // xml.destination = file("$buildDir/reports/coverage/jacoco.xml")
+        // html.destination = file("$buildDir/reports/coverage/html")
     }
 }
 
@@ -73,14 +84,6 @@ tasks.withType<JacocoReport> {
             exclude("generated")
         }
     )
-}
-
-tasks.test {
-    finalizedBy("jacocoTestReport")
-    doLast {
-        println("View code coverage at:")
-        println("file://$buildDir/reports/coverage/index.html")
-    }
 }
 
 tasks.jacocoTestCoverageVerification {
@@ -94,3 +97,9 @@ tasks.jacocoTestCoverageVerification {
         }
     }
 }
+
+/*
+JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter \
+  format-coverage target/site/jacoco/jacoco.xml     \
+  --input-type jacoco
+*/
