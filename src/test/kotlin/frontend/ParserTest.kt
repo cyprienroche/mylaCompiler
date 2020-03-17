@@ -4,27 +4,43 @@ import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.never
 import frontend.mock.MockParser
 import frontend.mock.SyntaxError
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-@DisplayName("Parsing valid and invalid programs")
-class ParseTreeGenTest {
+class ParserTest {
 
-    @DisplayName("Parsing valid and invalid expressions")
-    internal class ExpressionParsingTest {
+    internal class LiteralTest {
 
         @ParameterizedTest
-        @CsvSource("1", "2", "-1", "+123", "--3")
+        @CsvSource("1", "-2", "+123")
         internal fun validInteger(input: String) {
+            val mock = MockParser(input)
+            mock.parseLiteral()
+            SyntaxError(mock.listener, never()).verify()
+        }
+
+        @ParameterizedTest
+        @CsvSource("(", "-1i", "c3p0", "++3")
+        internal fun invalidInteger(input: String) {
+            val mock = MockParser(input)
+            mock.parseLiteral()
+            SyntaxError(mock.listener, atLeastOnce()).verify()
+        }
+    }
+
+    internal class ExpressionTest {
+
+        @ParameterizedTest
+        @CsvSource("1 + 1", "(2--3)", "1 * (3 + 2)", "+2-3*4/(+33  - -3 +  10 ++5)")
+        internal fun validExpression(input: String) {
             val mock = MockParser(input)
             mock.parseExpression()
             SyntaxError(mock.listener, never()).verify()
         }
 
         @ParameterizedTest
-        @CsvSource("(", "x", "-1i", "c3p0")
-        internal fun invalidInteger(input: String) {
+        @CsvSource("1 (2)", "x = 1", "--+-10", "6+*4", "0invalid")
+        internal fun invalidExpression(input: String) {
             val mock = MockParser(input)
             mock.parseExpression()
             SyntaxError(mock.listener, atLeastOnce()).verify()
