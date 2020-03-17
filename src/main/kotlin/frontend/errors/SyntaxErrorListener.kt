@@ -4,9 +4,7 @@ import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer
 
-class SyntaxErrorListener : BaseErrorListener() {
-
-    val errors = mutableListOf<SyntaxError>()
+class SyntaxErrorListener(private val eventListener: EventListener<SyntaxError>) : BaseErrorListener() {
 
     override fun syntaxError(
         recognizer: Recognizer<*, *>?,
@@ -17,6 +15,6 @@ class SyntaxErrorListener : BaseErrorListener() {
         e: RecognitionException?
     ) {
         val err = SyntaxError(line to charPositionInLine, msg.toString())
-        errors.add(err)
+        eventListener.receive(err)
     }
 }
