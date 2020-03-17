@@ -1,4 +1,8 @@
 import frontend.ParseTreeGen
+import frontend.errors.ErrorListener
+import frontend.errors.SemanticError
+import frontend.errors.SemanticErrorException
+import frontend.errors.SyntaxError
 import frontend.errors.SyntaxErrorException
 import frontend.errors.SyntaxErrorListener
 import java.io.File
@@ -6,11 +10,10 @@ import kotlin.system.exitProcess
 
 fun main() {
     val path = "src/main/resources/example.myla"
-
     val input = File(path)
 
     if (!input.isFile || input.extension != "myla") {
-        println("Error: incorrect file path or file format supplied.")
+        println("Error: the file ${input.name} is not a valid .myla file.")
         return
     }
 
@@ -23,12 +26,13 @@ fun main() {
 }
 
 fun generateAst(fileName: String) {
-    val syntaxErrorListener = SyntaxErrorListener()
-    val tree = ParseTreeGen(fileName, syntaxErrorListener).parseTree()
+    val syntaxListener = ErrorListener<SyntaxError>()
+    val tree = ParseTreeGen(fileName, SyntaxErrorListener(syntaxListener)).parseTree()
 
-    if (syntaxErrorListener.errors.isNotEmpty()) {
-        throw SyntaxErrorException(syntaxErrorListener.errors)
-    }
+    if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
+    val semanticsListener = ErrorListener<SemanticError>()
+    if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
+    if (semanticsListener.hasErrors) throw SemanticErrorException(semanticsListener.errors)
 
     println(tree.toStringTree())
 }
