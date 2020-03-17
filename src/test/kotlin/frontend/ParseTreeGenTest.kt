@@ -1,43 +1,33 @@
 package frontend
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import org.antlr.v4.runtime.ANTLRErrorListener
-import org.hamcrest.core.Is.`is`
-import org.junit.Assert.assertThat
-import org.junit.Test
+import com.nhaarman.mockitokotlin2.atLeastOnce
+import com.nhaarman.mockitokotlin2.never
+import frontend.mock.MockParser
+import frontend.mock.SyntaxError
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class ParseTreeGenTest {
 
-    private val listener = mock<ANTLRErrorListener> {}
+    @DisplayName("Parsing valid and invalid expressions")
+    internal class ExpressionParsingTest {
 
-    @Test
-    fun getCorrectParseTreeForIntegerLiteral() {
-        val parseTree = ParseTreeGen("src/test/resources/int.myla", listener)
-        assertThat(parseTree.parseTreeString(), `is`("(prog (stat (expr (literal 1))) <EOF>)"))
-    }
+        @ParameterizedTest
+        @CsvSource("1", "2", "-1", "+123", "--3")
+        internal fun validInteger(input: String) {
+            val mock = MockParser(input)
+            mock.parseExpression()
+            SyntaxError(mock.listener, never()).verify()
+        }
 
-    @Test
-    fun getCorrectParseTreeForIntegerAssignment() {
-        val parseTree = ParseTreeGen("src/test/resources/assign.myla", listener)
-        assertThat(parseTree.parseTreeString(), `is`("(prog (stat (identifier x) = (expr (literal 73))) <EOF>)"))
-    }
-
-    @Test
-    fun malformedProgramsAddErrorsToListener() {
-        val parseTree = ParseTreeGen(
-            "src/test/resources/invlid.myla", listener
-        )
-        parseTree.parseTreeString()
-        verify(listener).syntaxError(
-            any(),
-            any(),
-            eq(1),
-            eq(5),
-            eq("mismatched input '<EOF>' expecting {NAT, '-', '+', '('}"),
-            any()
-        )
+        @ParameterizedTest
+        @CsvSource("(", "x", "-1i", "c3p0")
+        internal fun invalidInteger(input: String) {
+            val mock = MockParser(input)
+            mock.parseExpression()
+            println(mock.listener)
+            SyntaxError(mock.listener, atLeastOnce()).verify()
+        }
     }
 }

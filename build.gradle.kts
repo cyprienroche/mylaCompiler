@@ -28,31 +28,37 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib-jdk8"))
     antlr("org.antlr:antlr4:4.8")
-    testImplementation("junit:junit:4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
     testImplementation("org.hamcrest:hamcrest-all:1.3")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
 
-val test: Test by tasks
-test.testLogging.setEvents(setOf("PASSED", "FAILED", "SKIPPED"))
-
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = "11"
-compileKotlin.dependsOn(tasks.generateGrammarSource)
+// config JVM target to 11 for kotlin compilation tasks
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "11"
+    dependsOn(tasks.generateGrammarSource)
+}
 
 // ANTLR configuration
-val generatedjavaFolder = "src/main/java/generated"
+val generatedJavaFolder = "src/main/java/generated"
 
 tasks.generateGrammarSource {
     maxHeapSize = "64m"
-    outputDirectory = File(generatedjavaFolder)
+    outputDirectory = File(generatedJavaFolder)
     arguments = arguments + listOf("-visitor", "-no-listener", "-Werror", "-long-messages", "-package", "generated")
 }
 
-val clean: Delete by tasks
-clean.delete(generatedjavaFolder)
+tasks.clean {
+    delete(generatedJavaFolder)
+}
 
 // Jacoco configuration
 jacoco {
