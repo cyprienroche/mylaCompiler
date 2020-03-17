@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
+@DisplayName("Parsing valid and invalid programs")
 class ParseTreeGenTest {
 
     @DisplayName("Parsing valid and invalid expressions")
@@ -26,7 +27,6 @@ class ParseTreeGenTest {
         internal fun invalidInteger(input: String) {
             val mock = MockParser(input)
             mock.parseExpression()
-            println(mock.listener)
             SyntaxError(mock.listener, atLeastOnce()).verify()
         }
     }

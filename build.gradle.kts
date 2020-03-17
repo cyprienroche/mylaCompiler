@@ -18,6 +18,10 @@ application.mainClassName = "MainKt"
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
 
+sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+    kotlin.srcDir("src/main/kotlin")
+}
+
 tasks.jar {
     manifest.attributes(mapOf("Implementation-Title" to project.name, "Implementation-Version" to project.version))
 }
