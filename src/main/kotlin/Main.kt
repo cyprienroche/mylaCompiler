@@ -10,12 +10,7 @@ import kotlin.system.exitProcess
 
 fun main() {
     val path = "src/main/resources/example.myla"
-    val input = File(path)
-
-    if (!input.isFile || input.extension != "myla") {
-        println("Error: the file ${input.name} is not a valid .myla file.")
-        return
-    }
+    if (!isValidFile(path)) return
 
     try {
         generateAst(path)
@@ -23,6 +18,17 @@ fun main() {
         println(e.message())
         exitProcess(e.errorCode)
     }
+}
+
+private fun isValidFile(fileName: String): Boolean {
+    val input = File(fileName)
+
+    if (!input.isFile || input.extension != "myla") {
+        println("Error: the file ${input.name} is not a valid .myla file.")
+        return false
+    }
+
+    return true
 }
 
 fun generateAst(fileName: String) {
