@@ -1,6 +1,8 @@
 
 lexer grammar MylaLexer;
 
+SEMICOLON: ';' ;
+
 NAT : DIGIT+ ;
 fragment DIGIT : [0-9] ;
 

@@ -2,15 +2,16 @@
 parser grammar MylaParser;
 
 options {
-  tokenVocab = MylaLexer;
+  tokenVocab = MylaLexer ;
 }
 
 // program
-prog : stat* EOF ;
+prog : stat EOF ;
 
 // statements
 stat : identifier ASSIGN assignRHS  # DeclarationStat
      | assignLHS ASSIGN assignRHS   # AssignLHSStat
+     | stat SEMICOLON stat          # SequenceStat
      ;
 
 // assignments
