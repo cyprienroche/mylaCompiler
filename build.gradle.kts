@@ -102,4 +102,7 @@ tasks.jacocoTestCoverageVerification {
 JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter \
   format-coverage target/site/jacoco/jacoco.xml     \
   --input-type jacoco
-*/
+
+  JACOCO_SOURCE_PATH=src/main/kotlin ./cc-test-reporter format-coverage build/reports/jacoco/test/jacocoTestReport.xml --input-type jacoco
+  ./cc-test-reporter upload-coverage -r eb8d427a5e59a28b0825f99aa65d7cdab6afc0c41dffc2d45104b9b74e21cc97
+ */

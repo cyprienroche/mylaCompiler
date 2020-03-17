@@ -2,7 +2,10 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #          
- version: 2.0
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+
  defaults: &defaults
    working_directory: ~/repo
    docker:
@@ -18,16 +21,9 @@
      steps:
        - checkout
        - run: gradle test
-       - run:
-           name: Save test results
-           command: |
-             mkdir -p ~/test-results/junit/
-             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-           when: always
-       - store_test_results:
-           path: ~/test-results
-       - store_artifacts:
-           path: ~/test-results/junit
+       - codecov/upload:
+           file: build/reports/jacoco/test/jacocoTestReport.xml
+           flags: coverage
    checkstyle:
      <<: *defaults
      steps:
