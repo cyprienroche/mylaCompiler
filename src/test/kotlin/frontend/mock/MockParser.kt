@@ -32,6 +32,11 @@ class MockParser(input: String) {
         errorIfEntireInputNotParsed()
     }
 
+    fun parseLiteral() {
+        parser.literal()
+        errorIfEntireInputNotParsed()
+    }
+
     private fun errorIfEntireInputNotParsed() {
         if (parser.currentToken.text != "<EOF>") {
             listener.syntaxError(mock {}, mock {}, 0, 0, "", mock {})
