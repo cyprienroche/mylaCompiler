@@ -11,14 +11,11 @@ out
 .gradle
 build
 
+#ignore JaCoCo generated files
+coverage
+
 #ignore Java class files
 *.class
 
 #ignore junk macOS generated files
 .DS_Store
-
-target
-*.ipr
-.classpath
-.settings
-.project
