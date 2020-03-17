@@ -63,18 +63,15 @@ tasks.test {
     finalizedBy("jacocoTestReport")
     doLast {
         println("View code coverage at:")
-        // println("file://$buildDir/reports/coverage/index.html")
         println("file://$buildDir/reports/jacoco/test/html/index.html")
     }
 }
 
 tasks.jacocoTestReport {
     reports {
-        csv.isEnabled = true
+        csv.isEnabled = false
         xml.isEnabled = true
         html.isEnabled = true
-        // xml.destination = file("$buildDir/reports/coverage/jacoco.xml")
-        // html.destination = file("$buildDir/reports/coverage/html")
     }
 }
 
@@ -97,12 +94,3 @@ tasks.jacocoTestCoverageVerification {
         }
     }
 }
-
-/*
-JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter \
-  format-coverage target/site/jacoco/jacoco.xml     \
-  --input-type jacoco
-
-  JACOCO_SOURCE_PATH=src/main/kotlin ./cc-test-reporter format-coverage build/reports/jacoco/test/jacocoTestReport.xml --input-type jacoco
-  ./cc-test-reporter upload-coverage -r eb8d427a5e59a28b0825f99aa65d7cdab6afc0c41dffc2d45104b9b74e21cc97
- */
