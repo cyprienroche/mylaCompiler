@@ -9,14 +9,15 @@ import java.io.File
 
 fun generateAst(fileName: String) {
     val syntaxListener = ErrorListener<SyntaxError>()
-    val tree = ParseTreeGen(fileName, SyntaxErrorListener(syntaxListener)).parseTree()
+    val tree = ParseTreeGen(fileName, SyntaxErrorListener(syntaxListener))
+    println(tree.parseTreeString())
 
     if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
     val semanticsListener = ErrorListener<SemanticError>()
     if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
     if (semanticsListener.hasErrors) throw SemanticErrorException(semanticsListener.errors)
 
-    println(tree.toStringTree())
+    // println(tree.toStringTree())
 }
 
 fun isValidFile(fileName: String): Boolean {
