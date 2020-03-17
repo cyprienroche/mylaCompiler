@@ -3,8 +3,9 @@ package frontend.errors
 import java.lang.Exception
 
 sealed class ProgramErrorException(private val errors: List<ProgramError>, val errorCode: Int) : Exception() {
-    fun message(): String = "Errors detected during compilation. Exit $errorCode.\n" +
-        errors.fold("", { acc, item -> acc + item + '\n' })
+    fun message(): String =
+        "Errors detected during compilation. Exit $errorCode.\n" +
+            errors.fold("", { acc, item -> acc + item + '\n' })
 }
 
 class SyntaxErrorException(errors: List<SyntaxError>) : ProgramErrorException(errors, 100)
