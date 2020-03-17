@@ -1,6 +1,7 @@
 package frontend.mock
 
 import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import org.antlr.v4.runtime.ANTLRErrorListener
 import org.antlr.v4.runtime.RecognitionException
@@ -10,12 +11,12 @@ import org.mockito.verification.VerificationMode
 class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
 
     private val listener: ANTLRErrorListener = verify(mock, mode)
-    private var recognizer: Recognizer<*, *> = anyOrNull()
-    private var offendingSymbol: Any = anyOrNull()
-    private var line: Int = anyOrNull()
-    private var charPositionInLine: Int = anyOrNull()
-    private var msg: String = anyOrNull()
-    private var e: RecognitionException = anyOrNull()
+    private var recognizer: Recognizer<*, *>? = null
+    private var offendingSymbol: Any? = null
+    private var line: Int? = null
+    private var charPosInLine: Int? = null
+    private var msg: String? = null
+    private var e: RecognitionException? = null
 
     fun withRecognizer(recognizer: Recognizer<*, *>): SyntaxError {
         this.recognizer = recognizer
@@ -32,8 +33,8 @@ class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
         return this
     }
 
-    fun withCharPositionInLine(charPositionInLine: Int): SyntaxError {
-        this.charPositionInLine = charPositionInLine
+    fun withCharPositionInLine(charPosInLine: Int): SyntaxError {
+        this.charPosInLine = charPosInLine
         return this
     }
 
@@ -47,5 +48,24 @@ class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
         return this
     }
 
-    fun verify() = listener.syntaxError(recognizer, offendingSymbol, line, charPositionInLine, msg, e)
+    fun verify() = listener.syntaxError(
+        recognizerMatcher(),
+        offendingMatcher(),
+        lineMatcher(),
+        charPosMatcher(),
+        msgMatcher(),
+        eMatcher()
+    )
+
+    private fun recognizerMatcher() = if (recognizer == null) anyOrNull() else eq(recognizer)
+
+    private fun offendingMatcher() = if (offendingSymbol == null) anyOrNull() else eq(offendingSymbol)
+
+    private fun lineMatcher() = if (line == null) anyOrNull() else eq(line) ?: anyOrNull()
+
+    private fun charPosMatcher() = if (charPosInLine == null) anyOrNull() else eq(charPosInLine) ?: anyOrNull()
+
+    private fun msgMatcher() = if (msg == null) anyOrNull() else eq(msg)
+
+    private fun eMatcher() = if (e == null) anyOrNull() else eq(e)
 }
