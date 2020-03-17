@@ -69,7 +69,7 @@ class ParserTest {
     internal class StatementTest {
 
         @ParameterizedTest
-        @CsvSource("x = 2", "y = -z", "if = _value____0")
+        @CsvSource("x = 2", "y = -z + \t 3", "if =  _value____0")
         internal fun validStatement(input: String) {
             val mock = MockParser(input)
             mock.parseStatement()
