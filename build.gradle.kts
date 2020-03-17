@@ -4,6 +4,7 @@ plugins {
     java
     kotlin("jvm") version "1.3.61"
     id("org.jmailen.kotlinter") version "2.3.0"
+    jacoco
     antlr
     application
     distribution
@@ -41,6 +42,7 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = "11"
 compileKotlin.dependsOn(tasks.generateGrammarSource)
 
+// ANTLR configuration
 val generatedjavaFolder = "src/main/java/generated"
 
 tasks.generateGrammarSource {
@@ -51,3 +53,53 @@ tasks.generateGrammarSource {
 
 val clean: Delete by tasks
 clean.delete(generatedjavaFolder)
+
+// Jacoco configuration
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+tasks.test {
+    finalizedBy("jacocoTestReport")
+    doLast {
+        println("View code coverage at:")
+        // println("file://$buildDir/reports/coverage/index.html")
+        println("file://$buildDir/reports/jacoco/test/html/index.html")
+    }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        csv.isEnabled = true
+        xml.isEnabled = true
+        html.isEnabled = true
+        // xml.destination = file("$buildDir/reports/coverage/jacoco.xml")
+        // html.destination = file("$buildDir/reports/coverage/html")
+    }
+}
+
+tasks.withType<JacocoReport> {
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("generated")
+        }
+    )
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = "CLASS"
+            excludes = listOf("generated.*")
+            limit {
+                minimum = "0.8".toBigDecimal()
+            }
+        }
+    }
+}
+
+/*
+JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter \
+  format-coverage target/site/jacoco/jacoco.xml     \
+  --input-type jacoco
+*/
