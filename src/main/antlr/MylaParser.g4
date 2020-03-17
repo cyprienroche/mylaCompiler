@@ -2,27 +2,35 @@
 parser grammar MylaParser;
 
 options {
-  tokenVocab = MylaLexer;
+  tokenVocab = MylaLexer ;
 }
 
 // program
-prog : stat* EOF ;
+prog : stat EOF ;
 
 // statements
-stat : expr
-     | identifier ASSIGN expr
+stat : identifier ASSIGN assignRHS  # DeclarationStat
+     | assignLHS ASSIGN assignRHS   # AssignLHSStat
+     | stat SEMICOLON stat          # SequenceStat
      ;
+
+// assignments
+assignLHS : identifier ;
+assignRHS : expr       ;
 
 // expressions
-expr : literal
-     | expr mdmBinop expr
-     | expr pnBinop  expr
-     | OPENPAR expr CLOSEPAR
+expr : literal                      # LiteralExpr
+     | identifier                   # VariableExpr
+     | unaryOp expr                 # UnaryOpExpr
+     | expr mdmBinop expr           # MulDivModBinOpExpr
+     | expr pnBinop  expr           # AddSubOpExpr
+     | OPENPAR expr CLOSEPAR        # BracExpr
      ;
 
+unaryOp   : NEG             ;
 mdmBinop  : MUL | DIV | MOD ;
-pnBinop   : PLUS | NEG      ;
+pnBinop   : ADD | NEG       ;
 
-literal : ( PLUS | NEG )? NAT ;
+literal : ( ADD | NEG )? NAT ;
 
 identifier : IDENT ;

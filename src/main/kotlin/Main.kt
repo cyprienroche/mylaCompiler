@@ -1,16 +1,14 @@
-import frontend.ParseTreeGen
-import frontend.errors.MylaErrorListener
+import frontend.errors.SyntaxErrorException
+import kotlin.system.exitProcess
 
 fun main() {
-    val path = "src/main/resources/Example.myla"
-    val errorListener = MylaErrorListener()
+    val path = "src/main/resources/example.myla"
+    if (!isValidFile(path)) return
 
-    val tree = ParseTreeGen(path, errorListener).parseTree()
-
-    if (errorListener.errors.isNotEmpty()) {
-        print(errorListener)
-        println("${errorListener.errors.size} parser error(s) detected, no further compilation attempted.")
-        return
+    try {
+        generateAst(path)
+    } catch (e: SyntaxErrorException) {
+        println(e.message())
+        exitProcess(e.errorCode)
     }
-    println(tree.toStringTree())
 }
