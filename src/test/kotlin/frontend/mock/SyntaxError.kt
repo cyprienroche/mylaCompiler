@@ -1,6 +1,6 @@
 package frontend.mock
 
-import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.verify
 import org.antlr.v4.runtime.ANTLRErrorListener
 import org.antlr.v4.runtime.RecognitionException
@@ -10,12 +10,12 @@ import org.mockito.verification.VerificationMode
 class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
 
     private val listener: ANTLRErrorListener = verify(mock, mode)
-    private var recognizer: Recognizer<*, *> = any()
-    private var offendingSymbol: Any = any()
-    private var line: Int = any()
-    private var charPositionInLine: Int = any()
-    private var msg: String = any()
-    private var e: RecognitionException = any()
+    private var recognizer: Recognizer<*, *> = anyOrNull()
+    private var offendingSymbol: Any = anyOrNull()
+    private var line: Int = anyOrNull()
+    private var charPositionInLine: Int = anyOrNull()
+    private var msg: String = anyOrNull()
+    private var e: RecognitionException = anyOrNull()
 
     fun withRecognizer(recognizer: Recognizer<*, *>) {
         this.recognizer = recognizer
