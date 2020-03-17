@@ -31,7 +31,7 @@ class ParserTest {
     internal class ExpressionTest {
 
         @ParameterizedTest
-        @CsvSource("1 + 1", "(2--3)", "1 * (3 + 2)", "+2-3*4/(+33  - -3 +  10 ++5)")
+        @CsvSource("1 + 1", "(2--3)", "1 * (3 + 2)", "+2-3*4/(+33+ \r - -3 + \t 10 ++5)")
         internal fun validExpression(input: String) {
             val mock = MockParser(input)
             mock.parseExpression()
