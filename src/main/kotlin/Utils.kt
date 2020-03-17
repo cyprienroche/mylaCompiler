@@ -1,4 +1,4 @@
-import frontend.ParseTreeGen
+import frontend.ParseTreeGenerator
 import frontend.errors.Error.Semantic
 import frontend.errors.Error.Syntax
 import frontend.errors.ErrorListener
@@ -9,7 +9,7 @@ import java.io.File
 
 fun generateAst(fileName: String) {
     val syntaxListener = ErrorListener<FrontendError>()
-    val tree = ParseTreeGen(fileName, SyntaxErrorListener(syntaxListener))
+    val tree = ParseTreeGenerator(fileName, SyntaxErrorListener(syntaxListener))
     println(tree.parseTreeString())
 
     if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
