@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer
 
-class MylaErrorListener : BaseErrorListener() {
+class SyntaxErrorListener : BaseErrorListener() {
 
     val errors = mutableListOf<SyntaxError>()
 
@@ -19,10 +19,4 @@ class MylaErrorListener : BaseErrorListener() {
         val err = SyntaxError(line to charPositionInLine, msg.toString())
         errors.add(err)
     }
-
-    override fun toString(): String = errors.fold("", { acc, item -> acc + item + '\n' })
-}
-
-data class SyntaxError(val position: Pair<Int, Int>, val msg: String) {
-    override fun toString(): String = "Syntactic Error at ${position.first}:${position.second} -- $msg"
 }
