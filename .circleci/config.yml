@@ -3,44 +3,46 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #          
 version: 2.0
- defaults: &defaults
-   working_directory: ~/repo
-   docker:
-     - image: circleci/openjdk:11-jdk
- jobs:
-   build:
-     <<: *defaults
-     steps:
-       - checkout
-       - run: gradle assemble
-   test:
-     <<: *defaults
-     steps:
-       - checkout
-       - run: gradle test
-   checkstyle:
-     <<: *defaults
-     steps:
-       - checkout
-       - run: gradle lintKotlinTest
-   install:
-     <<: *defaults
-     steps:
-       - checkout
-       - run: gradle installDist
-       
- workflows:
-   version: 2
-   build-test-style-install:
-     jobs:
-       - build
-       - test:
-           requires:
-             - build
-       - checkstyle:
-           requires:
-               - build
-       - install:
-           requires:
-             - test
-             - checkstyle
+orbs:
+  codecov: codecov/codecov@1.0.2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/openjdk:11-jdk
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: gradle assemble
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: gradle test
+  checkstyle:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: gradle lintKotlinTest
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: gradle installDist
+
+workflows:
+  version: 2
+  build-test-style-install:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - checkstyle:
+          requires:
+            - build
+      - install:
+          requires:
+            - test
+            - checkstyle
