@@ -19,12 +19,12 @@ assignLHS : identifier ;
 assignRHS : expr       ;
 
 // expressions
-expr : literal                # LiteralExpr
-     | identifier             # VariableExpr
-     | unaryOp expr           # UnaryOpExpr
-     | expr mdmBinop expr     # MulDivModBinOpExpr
-     | expr pnBinop  expr     # AddSubOpExpr
-     | OPENPAR expr CLOSEPAR  # BracExpr
+expr : literal                      # LiteralExpr
+     | identifier                   # VariableExpr
+     | unaryOp expr                 # UnaryOpExpr
+     | expr mdmBinop expr           # MulDivModBinOpExpr
+     | expr pnBinop  expr           # AddSubOpExpr
+     | OPENPAR expr CLOSEPAR        # BracExpr
      ;
 
 unaryOp   : NEG             ;
