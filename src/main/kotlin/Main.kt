@@ -1,4 +1,4 @@
-import frontend.errors.SyntaxErrorException
+import frontend.errors.FrontendErrorException
 import kotlin.system.exitProcess
 
 fun main() {
@@ -7,8 +7,8 @@ fun main() {
 
     try {
         generateAst(path)
-    } catch (e: SyntaxErrorException) {
+    } catch (e: FrontendErrorException) {
         println(e.message())
-        exitProcess(e.errorCode)
+        exitProcess(e.error.code)
     }
 }
