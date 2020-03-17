@@ -1,7 +1,8 @@
 
 lexer grammar MylaLexer;
 
-NAT : [0-9]+ ;
+NAT : DIGIT+ ;
+fragment DIGIT : [0-9] ;
 
 // whitespace
 WHITESPACE : [ \n\r\t\f] -> skip ;
@@ -9,12 +10,12 @@ WHITESPACE : [ \n\r\t\f] -> skip ;
 NEG  : '-' ;
 
 // identifiers
-IDENT : [_a-zA-Z] [_a-zA-Z0-9]* ;
+IDENT : [_a-zA-Z] [_a-zA-Z0-9] * ;
 
 MUL  : '*' ;
 DIV  : '/' ;
 MOD  : '%' ;
-PLUS : '+' ;
+ADD : '+' ;
 
 OPENPAR  : '(' ;
 CLOSEPAR : ')' ;
