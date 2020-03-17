@@ -13,6 +13,7 @@ build
 
 #ignore JaCoCo generated files
 coverage
+cc-test-reporter
 
 #ignore Java class files
 *.class
