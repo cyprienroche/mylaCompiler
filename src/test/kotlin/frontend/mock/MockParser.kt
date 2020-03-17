@@ -27,6 +27,16 @@ class MockParser(input: String) {
         this.parser = parser
     }
 
+    fun parseStatement() {
+        parser.stat()
+        errorIfEntireInputNotParsed()
+    }
+
+    fun parseAssignLHS() {
+        parser.assignLHS()
+        errorIfEntireInputNotParsed()
+    }
+
     fun parseExpression() {
         parser.expr()
         errorIfEntireInputNotParsed()

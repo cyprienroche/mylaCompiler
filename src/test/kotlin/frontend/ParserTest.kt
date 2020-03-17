@@ -46,4 +46,42 @@ class ParserTest {
             SyntaxError(mock.listener, atLeastOnce()).verify()
         }
     }
+
+    internal class AssignTest {
+
+        @ParameterizedTest
+        @CsvSource("identifier", "Variable", "_value____0")
+        internal fun validLHSAssignment(input: String) {
+            val mock = MockParser(input)
+            mock.parseAssignLHS()
+            SyntaxError(mock.listener, never()).verify()
+        }
+
+        @ParameterizedTest
+        @CsvSource("1ident", "=var", "()", "+i")
+        internal fun invalidLHSAssignment(input: String) {
+            val mock = MockParser(input)
+            mock.parseAssignLHS()
+            SyntaxError(mock.listener, atLeastOnce()).verify()
+        }
+    }
+
+    internal class StatementTest {
+
+        @ParameterizedTest
+        @CsvSource("x = 2", "y = -z", "if = _value____0")
+        internal fun validStatement(input: String) {
+            val mock = MockParser(input)
+            mock.parseStatement()
+            SyntaxError(mock.listener, never()).verify()
+        }
+
+        @ParameterizedTest
+        @CsvSource("10 = x", "+z = z", "=p = 0", "()")
+        internal fun invalidStatement(input: String) {
+            val mock = MockParser(input)
+            mock.parseStatement()
+            SyntaxError(mock.listener, atLeastOnce()).verify()
+        }
+    }
 }
