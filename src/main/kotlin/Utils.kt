@@ -1,21 +1,21 @@
 import frontend.ParseTreeGen
+import frontend.errors.Error.Semantic
+import frontend.errors.Error.Syntax
 import frontend.errors.ErrorListener
-import frontend.errors.SemanticError
-import frontend.errors.SemanticErrorException
-import frontend.errors.SyntaxError
-import frontend.errors.SyntaxErrorException
+import frontend.errors.FrontendError
+import frontend.errors.FrontendErrorException
 import frontend.errors.SyntaxErrorListener
 import java.io.File
 
 fun generateAst(fileName: String) {
-    val syntaxListener = ErrorListener<SyntaxError>()
+    val syntaxListener = ErrorListener<FrontendError>()
     val tree = ParseTreeGen(fileName, SyntaxErrorListener(syntaxListener))
     println(tree.parseTreeString())
 
-    if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
-    val semanticsListener = ErrorListener<SemanticError>()
-    if (syntaxListener.hasErrors) throw SyntaxErrorException(syntaxListener.errors)
-    if (semanticsListener.hasErrors) throw SemanticErrorException(semanticsListener.errors)
+    if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
+    val semanticsListener = ErrorListener<FrontendError>()
+    if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
+    if (semanticsListener.hasErrors) throw FrontendErrorException(Semantic, semanticsListener.errors)
 
     // println(tree.toStringTree())
 }
