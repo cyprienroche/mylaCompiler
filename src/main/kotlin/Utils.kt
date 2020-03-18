@@ -10,21 +10,24 @@ import java.io.File
 fun generateAst(fileName: String) {
     val syntaxListener = ErrorListener<FrontendError>()
     val tree = ParseTreeGenerator(fileName, SyntaxErrorListener(syntaxListener))
-    println(tree.parseTreeString())
+    tree.parseTree()
 
     if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
     val semanticsListener = ErrorListener<FrontendError>()
     if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
     if (semanticsListener.hasErrors) throw FrontendErrorException(Semantic, semanticsListener.errors)
-
-    // println(tree.toStringTree())
 }
 
-fun isValidFile(fileName: String): Boolean {
-    val input = File(fileName)
+fun isValidFile(args: Array<String>): Boolean {
+    if (args.isEmpty()) {
+        println("No arguments provided. Please provide the path to a .myla file. Aborting compilation")
+        return false
+    }
+
+    val input = File(args[0])
 
     if (!input.isFile || input.extension != "myla") {
-        println("Error: the file ${input.name} is not a valid .myla file.")
+        println("The file ${input.name} is not a valid .myla file. Aborting compilation")
         return false
     }
 
