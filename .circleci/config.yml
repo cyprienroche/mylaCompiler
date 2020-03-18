@@ -3,12 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2.1
-orbs:
-  codecov: codecov/codecov@1.0.2
 defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/openjdk:11-jdk
+  environment:
+    CC_TEST_REPORTER_ID: eb8d427a5e59a28b0825f99aa65d7cdab6afc0c41dffc2d45104b9b74e21cc97
 jobs:
   build:
     <<: *defaults
@@ -20,9 +20,17 @@ jobs:
     steps:
       - checkout
       - run: gradle test
-      - codecov/upload:
-          file: build/reports/jacoco/test/jacocoTestReport.xml
-          flags: coverage
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Upload coverage to code climate
+          command: |
+            export JACOCO_SOURCE_PATH=src/main/kotlin
+            ./cc-test-reporter format-coverage build/reports/jacoco/test/jacocoTestReport.xml --input-type jacoco
+            ./cc-test-reporter upload-coverage
   checkstyle:
     <<: *defaults
     steps:
