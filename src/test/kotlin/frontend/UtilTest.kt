@@ -28,6 +28,7 @@ class UtilTest {
         assertTrue(isValidFile(arrayOf(validProgram)))
         assertTrue(isValidFile(arrayOf(invalidProgram)))
         assertFalse(isValidFile(arrayOf(invalidFile)))
+        assertFalse(isValidFile(arrayOf()))
     }
 
     @Test
