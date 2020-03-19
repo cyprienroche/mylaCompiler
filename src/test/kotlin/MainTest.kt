@@ -1,9 +1,6 @@
-package frontend
-
 import frontend.errors.Error
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import main
 import org.itsallcode.junit.sysextensions.AssertExit.assertExitWithStatus
 import org.itsallcode.junit.sysextensions.ExitGuard
 import org.junit.jupiter.api.AfterEach
