@@ -30,12 +30,12 @@ class MainTest {
     private val invalidFile = "src/test/resources/invalid"
 
     @Test
-    fun validProgramCompiles() {
+    internal fun validProgramCompiles() {
         main(arrayOf(validProgram))
     }
 
     @Test
-    fun invalidSyntaxCauseExitAndPrintMessage() {
+    internal fun invalidSyntaxCauseExitAndPrintMessage() {
         assertExitWithStatus(Error.Syntax.code) { main(arrayOf(invalidSyntaxProgram)) }
         val output = outContent.toString()
         assertTrue(output.contains("Exit"))
@@ -43,7 +43,7 @@ class MainTest {
     }
 
     @Test
-    fun invalidFileCauseExitAndPrintMessage() {
+    internal fun invalidFileCauseExitAndPrintMessage() {
         assertExitWithStatus(1) { main(arrayOf(invalidFile)) }
     }
 }
