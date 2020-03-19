@@ -4,7 +4,6 @@ import frontend.errors.Error.Syntax
 import frontend.errors.FrontendErrorException
 import generateAst
 import isValidFile
-import main
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -17,11 +16,6 @@ class UtilTest {
     private val validProgram = "src/test/resources/valid/assign.myla"
     private val invalidProgram = "src/test/resources/invalid/assignBracket.myla"
     private val invalidFile = "src/test/resources/invalid"
-
-    @Test
-    internal fun passValidProgramCompiles() {
-        main(arrayOf(validProgram))
-    }
 
     @Test
     internal fun canTellIfFileIsValid() {
