@@ -1,3 +1,3 @@
 package ast
 
-class ProgramTree(val main: List<StatementTree>)
+data class ProgramTree(val main: List<StatementTree>)
