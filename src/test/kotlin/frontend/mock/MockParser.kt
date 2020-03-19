@@ -57,10 +57,10 @@ class MockParser(private val input: String) {
     }
 
     fun verifyValid() {
-        SyntaxError(listener, never().description("A syntax error occurred when parsing $input")).verify()
+        HasSyntaxError(listener, never().description("A syntax error occurred when parsing $input")).verify()
     }
 
     fun verifyInvalid() {
-        SyntaxError(listener, atLeastOnce().description("The parser could not catch any errors in $input")).verify()
+        HasSyntaxError(listener, atLeastOnce().description("The parser could not catch any errors in $input")).verify()
     }
 }
