@@ -37,6 +37,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
     testImplementation("org.hamcrest:hamcrest-all:1.3")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("org.itsallcode:junit5-system-extensions:1.1.0")
 }
 tasks.test {
     useJUnitPlatform()
