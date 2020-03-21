@@ -13,10 +13,7 @@ fun generateAst(fileName: String) {
     if (syntaxListener.hasErrors) throw CompilationException(Syntax, syntaxListener.errors)
     val semanticsListener = ErrorListener<CompilationError>()
     if (syntaxListener.hasErrors) throw CompilationException(Syntax, syntaxListener.errors)
-    if (semanticsListener.hasErrors) throw CompilationException(
-        Semantic,
-        semanticsListener.errors
-    )
+    if (semanticsListener.hasErrors) throw CompilationException(Semantic, semanticsListener.errors)
 }
 
 /* must be valid file and have myla extension */
