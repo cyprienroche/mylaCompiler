@@ -1,9 +1,6 @@
-package frontend.errors
-
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
-import frontend.mock.HasSyntaxError
-import generateParseTree
+import mock.HasSyntaxError
 import org.antlr.v4.runtime.ANTLRErrorListener
 import org.junit.jupiter.api.Test
 
