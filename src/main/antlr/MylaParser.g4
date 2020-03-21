@@ -9,7 +9,7 @@ options {
 prog : stat EOF ;
 
 // statements
-stat : identifier ASSIGN assignRHS  # DeclarationStat
+stat : identifier                   # DeclarationStat
      | assignLHS ASSIGN assignRHS   # AssignStat
      | stat SEMICOLON stat          # SequenceStat
      ;
