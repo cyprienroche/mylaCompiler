@@ -1,4 +1,4 @@
-package frontend.errors
+package errors
 
 @FunctionalInterface
 interface EventListener<EventType> {

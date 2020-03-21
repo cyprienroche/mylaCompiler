@@ -2,7 +2,7 @@ package frontend.errors
 
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
-import frontend.ParseTreeGenerator
+import frontend.generator.ParseTreeGenerator
 import frontend.mock.HasSyntaxError
 import org.antlr.v4.runtime.ANTLRErrorListener
 import org.junit.jupiter.api.Test
@@ -13,7 +13,10 @@ class ParseTreeGeneratorTest {
 
     @Test
     internal fun assignBracketAddsErrorToListener() {
-        val parseTree = ParseTreeGenerator("src/test/resources/invalid/assignBracket.myla", listener)
+        val parseTree = ParseTreeGenerator(
+            "src/test/resources/invalid/assignBracket.myla",
+            listener
+        )
         parseTree.parseTree()
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
@@ -24,7 +27,10 @@ class ParseTreeGeneratorTest {
 
     @Test
     internal fun assignBinOpAddsErrorToListener() {
-        val parseTree = ParseTreeGenerator("src/test/resources/invalid/assignBinOp.myla", listener)
+        val parseTree = ParseTreeGenerator(
+            "src/test/resources/invalid/assignBinOp.myla",
+            listener
+        )
         parseTree.parseTree()
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
@@ -35,7 +41,10 @@ class ParseTreeGeneratorTest {
 
     @Test
     internal fun integerDeclarationAddsErrorToListener() {
-        val parseTree = ParseTreeGenerator("src/test/resources/invalid/integerDeclaration.myla", listener)
+        val parseTree = ParseTreeGenerator(
+            "src/test/resources/invalid/integerDeclaration.myla",
+            listener
+        )
         parseTree.parseTree()
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)

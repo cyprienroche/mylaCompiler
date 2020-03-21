@@ -1,6 +1,6 @@
-package frontend.errors
+package errors
 
-import frontend.errors.Error.Syntax
+import errors.Error.Syntax
 import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer

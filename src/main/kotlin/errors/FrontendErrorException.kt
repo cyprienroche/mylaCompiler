@@ -1,4 +1,4 @@
-package frontend.errors
+package errors
 
 import java.lang.Exception
 

@@ -1,4 +1,4 @@
-package frontend.errors
+package errors
 
 class ErrorListener<E> : EventListener<E> {
     private val es = mutableListOf<E>()
