@@ -1,5 +1,9 @@
+package errors
+
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import generateProgramParseTree
 import mock.HasSyntaxError
 import org.antlr.v4.runtime.ANTLRErrorListener
 import org.junit.jupiter.api.Test
@@ -8,9 +12,24 @@ class GeneratorTest {
 
     private val listener = mock<ANTLRErrorListener> {}
 
+    private fun parseTree(dir: String, fileName: String) =
+        generateProgramParseTree("src/test/resources/$dir/$fileName.myla", listener)
+
+    @Test
+    internal fun validAssignmentAddsNoError() {
+        parseTree("valid", "assign")
+        HasSyntaxError(listener, never()).verify()
+    }
+
+    @Test
+    internal fun validDeclarationAddsNoError() {
+        parseTree("valid", "declaration")
+        HasSyntaxError(listener, never()).verify()
+    }
+
     @Test
     internal fun assignBracketAddsErrorToListener() {
-        generateProgramParseTree("src/test/resources/invalid/assignBracket.myla", listener)
+        parseTree("invalid", "assignBracket")
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(4)
@@ -20,7 +39,7 @@ class GeneratorTest {
 
     @Test
     internal fun assignBinOpAddsErrorToListener() {
-        generateProgramParseTree("src/test/resources/invalid/assignBinOp.myla", listener)
+        parseTree("invalid", "assignBinOp")
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(7)
@@ -30,7 +49,7 @@ class GeneratorTest {
 
     @Test
     internal fun integerDeclarationAddsErrorToListener() {
-        generateProgramParseTree("src/test/resources/invalid/integerDeclaration.myla", listener)
+        parseTree("invalid", "integerDeclaration")
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(0)
