@@ -20,8 +20,5 @@ fun generateParser(stream: CharStream, listener: ANTLRErrorListener): MylaParser
     return parser
 }
 
-fun generateParseTree(parser: MylaParser): ParseTree =
-    parser.prog()
-
-fun generateParseTree(path: String, listener: ANTLRErrorListener): ParseTree =
-    generateParseTree(generateParser(CharStreams.fromFileName(path), listener))
+fun generateProgramParseTree(path: String, listener: ANTLRErrorListener): ParseTree =
+    generateParser(CharStreams.fromFileName(path), listener).prog()

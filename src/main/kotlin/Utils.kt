@@ -8,7 +8,7 @@ import java.io.File
 
 fun generateAst(fileName: String) {
     val syntaxListener = ErrorListener<CompilationError>()
-    val tree = generateParseTree(fileName, SyntaxErrorListener(syntaxListener))
+    val tree = generateProgramParseTree(fileName, SyntaxErrorListener(syntaxListener))
 
     if (syntaxListener.hasErrors) throw CompilationException(Syntax, syntaxListener.errors)
     val semanticsListener = ErrorListener<CompilationError>()
