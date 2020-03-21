@@ -6,12 +6,13 @@ options {
 }
 
 // program
-prog : stat EOF ;
+prog : stat EOF                     # Program
+     ;
 
 // statements
 stat : identifier                   # DeclarationStat
-     | assignLHS ASSIGN assignRHS   # AssignStat
-     | stat SEMICOLON stat          # SequenceStat
+     | assignLHS '=' assignRHS      # AssignStat
+     | stat ';' stat                # SequenceStat
      ;
 
 // assignments
@@ -22,14 +23,12 @@ assignRHS : expr       ;
 expr : literal                      # LiteralExpr
      | identifier                   # VariableExpr
      | unaryOp expr                 # UnaryOpExpr
-     | expr mdmBinop expr           # MulDivModExpr
-     | expr pnBinop  expr           # AddSubExpr
-     | OPENPAR expr CLOSEPAR        # ParensExpr
+     | expr op=('*'|'/'|'%') expr   # MulDivModExpr
+     | expr op=('+'|'-')  expr      # AddSubExpr
+     | '(' expr ')'                 # ParensExpr
      ;
 
-unaryOp   : NEG             ;
-mdmBinop  : MUL | DIV | MOD ;
-pnBinop   : ADD | NEG       ;
+unaryOp : NEG ;
 
 literal : ( ADD | NEG )? NAT ;
 

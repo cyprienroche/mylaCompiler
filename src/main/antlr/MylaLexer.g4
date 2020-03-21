@@ -17,7 +17,7 @@ IDENT : [_a-zA-Z] [_a-zA-Z0-9] * ;
 MUL  : '*' ;
 DIV  : '/' ;
 MOD  : '%' ;
-ADD : '+' ;
+ADD  : '+' ;
 
 OPENPAR  : '(' ;
 CLOSEPAR : ')' ;
