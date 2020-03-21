@@ -1,4 +1,4 @@
-package frontend.mock
+package mock
 
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq

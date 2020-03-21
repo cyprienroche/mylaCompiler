@@ -1,4 +1,4 @@
-package frontend.mock
+package mock
 
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
@@ -41,10 +41,16 @@ class MockParser(private val input: String) {
     }
 
     fun verifyValid() {
-        HasSyntaxError(listener, never().description("A syntax error occurred when parsing $input")).verify()
+        HasSyntaxError(
+            listener,
+            never().description("A syntax error occurred when parsing $input")
+        ).verify()
     }
 
     fun verifyInvalid() {
-        HasSyntaxError(listener, atLeastOnce().description("The parser could not catch any errors in $input")).verify()
+        HasSyntaxError(
+            listener,
+            atLeastOnce().description("The parser could not catch any errors in $input")
+        ).verify()
     }
 }
