@@ -1,21 +1,22 @@
-import frontend.ParseTreeGenerator
-import frontend.errors.Error.Semantic
-import frontend.errors.Error.Syntax
-import frontend.errors.ErrorListener
-import frontend.errors.FrontendError
-import frontend.errors.FrontendErrorException
-import frontend.errors.SyntaxErrorListener
+import errors.Error.Semantic
+import errors.Error.Syntax
+import errors.ErrorListener
+import errors.FrontendError
+import errors.FrontendErrorException
+import errors.SyntaxErrorListener
 import java.io.File
 
 fun generateAst(fileName: String) {
     val syntaxListener = ErrorListener<FrontendError>()
-    val tree = ParseTreeGenerator(fileName, SyntaxErrorListener(syntaxListener))
-    tree.parseTree()
+    val tree = generateParseTree(fileName, SyntaxErrorListener(syntaxListener))
 
     if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
     val semanticsListener = ErrorListener<FrontendError>()
     if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
-    if (semanticsListener.hasErrors) throw FrontendErrorException(Semantic, semanticsListener.errors)
+    if (semanticsListener.hasErrors) throw FrontendErrorException(
+        Semantic,
+        semanticsListener.errors
+    )
 }
 
 fun isValidFile(args: Array<String>): Boolean {

@@ -1,4 +1,4 @@
-import frontend.errors.FrontendErrorException
+import errors.FrontendErrorException
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
