@@ -1,6 +1,5 @@
-package frontend.errors
+package errors
 
-import errors.FrontendErrorException
 import generateAst
 import java.io.File
 import org.junit.jupiter.api.Test
