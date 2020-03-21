@@ -42,14 +42,14 @@ class MockParser(private val input: String) {
     }
 
     fun verifyValid() {
-        HasSyntaxError(
+        BuildSyntaxError(
             listener,
             never().description("A syntax error occurred when parsing $input")
         ).verify()
     }
 
     fun verifyInvalid() {
-        HasSyntaxError(
+        BuildSyntaxError(
             listener,
             atLeastOnce().description("The parser could not catch any errors in $input")
         ).verify()

@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer
 import org.mockito.verification.VerificationMode
 
-class HasSyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
+class BuildSyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
 
     private val listener: ANTLRErrorListener = verify(mock, mode)
     private var recognizer: Recognizer<*, *>? = null
@@ -18,32 +18,32 @@ class HasSyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
     private var msg: String? = null
     private var e: RecognitionException? = null
 
-    fun withRecognizer(recognizer: Recognizer<*, *>): HasSyntaxError {
+    fun withRecognizer(recognizer: Recognizer<*, *>): BuildSyntaxError {
         this.recognizer = recognizer
         return this
     }
 
-    fun withOffendingSymbol(offendingSymbol: Any): HasSyntaxError {
+    fun withOffendingSymbol(offendingSymbol: Any): BuildSyntaxError {
         this.offendingSymbol = offendingSymbol
         return this
     }
 
-    fun withLine(line: Int): HasSyntaxError {
+    fun withLine(line: Int): BuildSyntaxError {
         this.line = line
         return this
     }
 
-    fun withCharPositionInLine(charPosInLine: Int): HasSyntaxError {
+    fun withCharPositionInLine(charPosInLine: Int): BuildSyntaxError {
         this.charPosInLine = charPosInLine
         return this
     }
 
-    fun withMessage(msg: String): HasSyntaxError {
+    fun withMessage(msg: String): BuildSyntaxError {
         this.msg = msg
         return this
     }
 
-    fun withRecognitionException(e: RecognitionException): HasSyntaxError {
+    fun withRecognitionException(e: RecognitionException): BuildSyntaxError {
         this.e = e
         return this
     }
