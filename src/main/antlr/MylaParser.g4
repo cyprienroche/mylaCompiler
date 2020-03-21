@@ -10,7 +10,7 @@ prog : stat EOF ;
 
 // statements
 stat : identifier ASSIGN assignRHS  # DeclarationStat
-     | assignLHS ASSIGN assignRHS   # AssignLHSStat
+     | assignLHS ASSIGN assignRHS   # AssignStat
      | stat SEMICOLON stat          # SequenceStat
      ;
 
@@ -22,9 +22,9 @@ assignRHS : expr       ;
 expr : literal                      # LiteralExpr
      | identifier                   # VariableExpr
      | unaryOp expr                 # UnaryOpExpr
-     | expr mdmBinop expr           # MulDivModBinOpExpr
-     | expr pnBinop  expr           # AddSubOpExpr
-     | OPENPAR expr CLOSEPAR        # BracExpr
+     | expr mdmBinop expr           # MulDivModExpr
+     | expr pnBinop  expr           # AddSubExpr
+     | OPENPAR expr CLOSEPAR        # ParensExpr
      ;
 
 unaryOp   : NEG             ;
