@@ -1,4 +1,4 @@
-import errors.FrontendErrorException
+import errors.CompilationException
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
 
     try {
         generateAst(args[0])
-    } catch (e: FrontendErrorException) {
+    } catch (e: CompilationException) {
         println(e.message())
         exitProcess(e.error.code)
     }
