@@ -17,5 +17,4 @@ class StatementTreeVisitor : MylaParserBaseVisitor<List<StatementTree>>() {
     override fun visitSequenceStat(ctx: MylaParser.SequenceStatContext?): List<StatementTree> {
         return emptyList()
     }
-
 }
