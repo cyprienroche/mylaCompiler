@@ -1,5 +1,5 @@
+import errors.CompilationException
 import errors.Error.Syntax
-import errors.FrontendErrorException
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -28,14 +28,14 @@ class UtilTest {
 
     @Test
     internal fun generateAstForInvalidProgramThrowsException() {
-        assertThrows<FrontendErrorException> { generateAst(invalidProgram) }
+        assertThrows<CompilationException> { generateAst(invalidProgram) }
     }
 
     @Test
     internal fun generateAstGivesCorrectErrorAndExitCode() {
         try {
             generateAst(invalidProgram)
-        } catch (e: FrontendErrorException) {
+        } catch (e: CompilationException) {
             assertThat(e.error, `is`(Syntax))
             assertThat(e.error.code, `is`(100))
             assertTrue(e.message().contains("${e.error.code}"))
