@@ -3,28 +3,12 @@ package frontend.mock
 import com.nhaarman.mockitokotlin2.atLeastOnce
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
-import generated.MylaLexer
-import generated.MylaParser
+import generateParser
 import org.antlr.v4.runtime.ANTLRErrorListener
-import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
 
 class MockParser(private val input: String) {
     private val listener = mock<ANTLRErrorListener> {}
-    private val parser: MylaParser
-
-    init {
-        val stream = CharStreams.fromString(input)
-        val lexer = MylaLexer(stream)
-        val tokens = CommonTokenStream(lexer)
-        parser = MylaParser(tokens)
-
-        lexer.removeErrorListeners()
-        lexer.addErrorListener(listener)
-
-        parser.removeErrorListeners()
-        parser.addErrorListener(listener)
-    }
+    private val parser = generateParser(input, listener)
 
     fun parseStatement(): MockParser {
         parser.stat()

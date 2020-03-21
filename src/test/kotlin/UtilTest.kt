@@ -1,5 +1,5 @@
-import frontend.errors.Error.Syntax
-import frontend.errors.FrontendErrorException
+import errors.Error.Syntax
+import errors.FrontendErrorException
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Assertions.assertFalse

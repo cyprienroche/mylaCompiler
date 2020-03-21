@@ -1,4 +1,4 @@
-import frontend.errors.Error
+import errors.Error
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import org.itsallcode.junit.sysextensions.AssertExit.assertExitWithStatus
