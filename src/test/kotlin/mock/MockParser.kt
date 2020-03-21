@@ -5,10 +5,11 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import generateParser
 import org.antlr.v4.runtime.ANTLRErrorListener
+import org.antlr.v4.runtime.CharStreams
 
 class MockParser(private val input: String) {
     private val listener = mock<ANTLRErrorListener> {}
-    private val parser = generateParser(input, listener)
+    private val parser = generateParser(CharStreams.fromString(input), listener)
 
     fun parseStatement(): MockParser {
         parser.stat()
