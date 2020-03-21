@@ -19,6 +19,7 @@ fun generateAst(fileName: String) {
     )
 }
 
+/* must be valid file and have myla extension */
 fun isValidFile(args: Array<String>): Boolean {
     if (args.isEmpty()) {
         println("No arguments provided. Please provide the path to a .myla file. Aborting compilation")
