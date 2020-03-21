@@ -29,7 +29,7 @@ class ParseTreeGeneratorTest {
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(7)
-            .withMessage("no viable alternative at input 'x=5+'")
+            .withMessage("mismatched input '<EOF>' expecting {NAT, '-', IDENT, '+', '('}")
             .verify()
     }
 
