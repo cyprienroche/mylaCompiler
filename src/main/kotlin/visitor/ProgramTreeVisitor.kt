@@ -2,13 +2,15 @@ package visitor
 
 import ast.ProgramTree
 import ast.StatementTree
-import generated.MylaParser.ProgContext
+import generated.MylaParser
 import generated.MylaParserBaseVisitor
 
 class ProgramTreeVisitor : MylaParserBaseVisitor<ProgramTree>() {
-    override fun visitProg(ctx: ProgContext): ProgramTree {
+    /* stat EOF */
+    override fun visitProgram(ctx: MylaParser.ProgramContext): ProgramTree {
         return ProgramTree(visitMain(ctx))
     }
 
-    private fun visitMain(ctx: ProgContext): List<StatementTree> = ctx.stat().accept(StatementTreeVisitor())
+    private fun visitMain(ctx: MylaParser.ProgramContext): List<StatementTree> =
+        ctx.stat().accept(StatementTreeVisitor())
 }
