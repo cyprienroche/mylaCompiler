@@ -10,5 +10,5 @@ class ProgramTreeVisitor : MylaParserBaseVisitor<ProgramTree>() {
         return ProgramTree(visitMain(ctx))
     }
 
-    private fun visitMain(ctx: ProgContext): List<StatementTree> = emptyList()
+    private fun visitMain(ctx: ProgContext): List<StatementTree> = ctx.stat().accept(StatementTreeVisitor())
 }
