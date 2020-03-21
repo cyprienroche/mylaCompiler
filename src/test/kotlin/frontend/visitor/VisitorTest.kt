@@ -17,8 +17,8 @@ class VisitorTest {
     @Test
     internal fun canVisitBasicProgram() {
         val parseTree = ParseTreeGenerator("$validProgramPath/assign.myla", listener).parseTree()
-        val programTree = parseTree.accept(ProgramTreeVisitor())
+        val visitor = ProgramTreeVisitor()
         val expectedTree = ProgramTree(emptyList())
-        assertThat(programTree, `is`(expectedTree))
+        assertThat(visitor.visit(parseTree), `is`(expectedTree))
     }
 }
