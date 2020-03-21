@@ -1,4 +1,4 @@
-package frontend.errors
+package errors
 
 enum class Error(val code: Int) {
     Syntax(100),

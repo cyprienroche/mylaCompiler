@@ -1,12 +1,11 @@
-package frontend
 
-import frontend.errors.Error
+import errors.Error.Syntax
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import main
 import org.itsallcode.junit.sysextensions.AssertExit.assertExitWithStatus
 import org.itsallcode.junit.sysextensions.ExitGuard
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -33,20 +32,28 @@ class MainTest {
     private val invalidFile = "src/test/resources/invalid"
 
     @Test
-    fun validProgramCompiles() {
+    internal fun validProgramCompiles() {
         main(arrayOf(validProgram))
     }
 
     @Test
-    fun invalidSyntaxCauseExitAndPrintMessage() {
-        assertExitWithStatus(Error.Syntax.code) { main(arrayOf(invalidSyntaxProgram)) }
+    internal fun invalidSyntaxCauseExitAndPrintMessage() {
+        assertExitWithStatus(Syntax.code) { main(arrayOf(invalidSyntaxProgram)) }
         val output = outContent.toString()
         assertTrue(output.contains("Exit"))
         assertTrue(output.contains("Syntax Error"))
     }
 
     @Test
-    fun invalidFileCauseExitAndPrintMessage() {
+    internal fun invalidFileCauseExitAndPrintMessage() {
         assertExitWithStatus(1) { main(arrayOf(invalidFile)) }
+    }
+
+    @Test
+    internal fun canTellIfFileIsValid() {
+        assertTrue(isValidFile(arrayOf(validProgram)))
+        assertTrue(isValidFile(arrayOf(invalidSyntaxProgram)))
+        assertFalse(isValidFile(arrayOf(invalidFile)))
+        assertFalse(isValidFile(arrayOf()))
     }
 }

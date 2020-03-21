@@ -1,4 +1,4 @@
-package frontend.mock
+package mock
 
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer
 import org.mockito.verification.VerificationMode
 
-class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
+class BuildSyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
 
     private val listener: ANTLRErrorListener = verify(mock, mode)
     private var recognizer: Recognizer<*, *>? = null
@@ -18,32 +18,32 @@ class SyntaxError(mock: ANTLRErrorListener, mode: VerificationMode) {
     private var msg: String? = null
     private var e: RecognitionException? = null
 
-    fun withRecognizer(recognizer: Recognizer<*, *>): SyntaxError {
+    fun withRecognizer(recognizer: Recognizer<*, *>): BuildSyntaxError {
         this.recognizer = recognizer
         return this
     }
 
-    fun withOffendingSymbol(offendingSymbol: Any): SyntaxError {
+    fun withOffendingSymbol(offendingSymbol: Any): BuildSyntaxError {
         this.offendingSymbol = offendingSymbol
         return this
     }
 
-    fun withLine(line: Int): SyntaxError {
+    fun withLine(line: Int): BuildSyntaxError {
         this.line = line
         return this
     }
 
-    fun withCharPositionInLine(charPosInLine: Int): SyntaxError {
+    fun withCharPositionInLine(charPosInLine: Int): BuildSyntaxError {
         this.charPosInLine = charPosInLine
         return this
     }
 
-    fun withMessage(msg: String): SyntaxError {
+    fun withMessage(msg: String): BuildSyntaxError {
         this.msg = msg
         return this
     }
 
-    fun withRecognitionException(e: RecognitionException): SyntaxError {
+    fun withRecognitionException(e: RecognitionException): BuildSyntaxError {
         this.e = e
         return this
     }

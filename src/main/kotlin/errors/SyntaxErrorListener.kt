@@ -1,11 +1,11 @@
-package frontend.errors
+package errors
 
-import frontend.errors.Error.Syntax
+import errors.Error.Syntax
 import org.antlr.v4.runtime.BaseErrorListener
 import org.antlr.v4.runtime.RecognitionException
 import org.antlr.v4.runtime.Recognizer
 
-class SyntaxErrorListener(private val eventListener: EventListener<FrontendError>) : BaseErrorListener() {
+class SyntaxErrorListener(private val eventListener: EventListener<CompilationError>) : BaseErrorListener() {
 
     override fun syntaxError(
         recognizer: Recognizer<*, *>?,
@@ -15,7 +15,7 @@ class SyntaxErrorListener(private val eventListener: EventListener<FrontendError
         msg: String?,
         e: RecognitionException?
     ) {
-        val err = FrontendError(Syntax, line to charPositionInLine, msg.toString())
+        val err = CompilationError(Syntax, line to charPositionInLine, msg.toString())
         eventListener.receive(err)
     }
 }

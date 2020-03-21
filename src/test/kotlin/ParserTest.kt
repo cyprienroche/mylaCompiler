@@ -1,6 +1,4 @@
-package frontend
-
-import frontend.mock.MockParser
+import mock.MockParser
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -60,7 +58,7 @@ class ParserTest {
     internal class StatementTest {
 
         @ParameterizedTest
-        @ValueSource(strings = ["x = \n 2", "y = -z + \n \t 3", "if =  _value____0"])
+        @ValueSource(strings = ["x = \n 2", "y = -z + \n \t 3", "if =  _value____0", "x"])
         fun validStatement(input: String) {
             val mock = MockParser(input)
             mock.parseStatement().verifyValid()

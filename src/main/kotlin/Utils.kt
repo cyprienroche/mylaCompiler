@@ -1,23 +1,22 @@
-import frontend.ParseTreeGenerator
-import frontend.errors.Error.Semantic
-import frontend.errors.Error.Syntax
-import frontend.errors.ErrorListener
-import frontend.errors.FrontendError
-import frontend.errors.FrontendErrorException
-import frontend.errors.SyntaxErrorListener
+import errors.CompilationError
+import errors.CompilationException
+import errors.Error.Semantic
+import errors.Error.Syntax
+import errors.ErrorListener
+import errors.SyntaxErrorListener
 import java.io.File
 
 fun generateAst(fileName: String) {
-    val syntaxListener = ErrorListener<FrontendError>()
-    val tree = ParseTreeGenerator(fileName, SyntaxErrorListener(syntaxListener))
-    tree.parseTree()
+    val syntaxListener = ErrorListener<CompilationError>()
+    val tree = generateProgramParseTree(fileName, SyntaxErrorListener(syntaxListener))
 
-    if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
-    val semanticsListener = ErrorListener<FrontendError>()
-    if (syntaxListener.hasErrors) throw FrontendErrorException(Syntax, syntaxListener.errors)
-    if (semanticsListener.hasErrors) throw FrontendErrorException(Semantic, semanticsListener.errors)
+    if (syntaxListener.hasErrors) throw CompilationException(Syntax, syntaxListener.errors)
+    val semanticsListener = ErrorListener<CompilationError>()
+    if (syntaxListener.hasErrors) throw CompilationException(Syntax, syntaxListener.errors)
+    if (semanticsListener.hasErrors) throw CompilationException(Semantic, semanticsListener.errors)
 }
 
+/* must be valid file and have myla extension */
 fun isValidFile(args: Array<String>): Boolean {
     if (args.isEmpty()) {
         println("No arguments provided. Please provide the path to a .myla file. Aborting compilation")
