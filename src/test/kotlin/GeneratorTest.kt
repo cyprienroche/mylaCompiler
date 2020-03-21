@@ -10,7 +10,7 @@ class GeneratorTest {
 
     @Test
     internal fun assignBracketAddsErrorToListener() {
-        generateParseTree("src/test/resources/invalid/assignBracket.myla", listener)
+        generateProgramParseTree("src/test/resources/invalid/assignBracket.myla", listener)
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(4)
@@ -20,7 +20,7 @@ class GeneratorTest {
 
     @Test
     internal fun assignBinOpAddsErrorToListener() {
-        generateParseTree("src/test/resources/invalid/assignBinOp.myla", listener)
+        generateProgramParseTree("src/test/resources/invalid/assignBinOp.myla", listener)
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(7)
@@ -30,7 +30,7 @@ class GeneratorTest {
 
     @Test
     internal fun integerDeclarationAddsErrorToListener() {
-        generateParseTree("src/test/resources/invalid/integerDeclaration.myla", listener)
+        generateProgramParseTree("src/test/resources/invalid/integerDeclaration.myla", listener)
         HasSyntaxError(listener, atLeastOnce())
             .withLine(1)
             .withCharPositionInLine(0)
