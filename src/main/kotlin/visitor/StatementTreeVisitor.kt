@@ -1,23 +1,21 @@
 package visitor
 
+import ast.AssignmentTree
 import ast.StatementTree
 import generated.MylaParser
 import generated.MylaParserBaseVisitor
 
 class StatementTreeVisitor : MylaParserBaseVisitor<List<StatementTree>>() {
 
-    /* identifier */
-    override fun visitDeclarationStat(ctx: MylaParser.DeclarationStatContext): List<StatementTree> {
-        return emptyList()
-    }
-
-    /* assignLHS '=' assignRHS */
-    override fun visitAssignStat(ctx: MylaParser.AssignStatContext?): List<StatementTree> {
-        return emptyList()
+    /* variable '=' expression */
+    override fun visitAssignStat(ctx: MylaParser.AssignStatContext): List<StatementTree> {
+        val rhs = ctx.expression().accept(ExpressionTreeVisitor())
+        val lhs = ctx.variable().accept(VariableTreeVisitor())
+        return listOf(AssignmentTree(lhs, rhs))
     }
 
     /* stat ';' stat  */
-    override fun visitSequenceStat(ctx: MylaParser.SequenceStatContext?): List<StatementTree> {
+    override fun visitSequenceStat(ctx: MylaParser.SequenceStatContext): List<StatementTree> {
         return emptyList()
     }
 }

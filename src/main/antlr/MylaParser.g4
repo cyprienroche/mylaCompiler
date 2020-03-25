@@ -10,26 +10,21 @@ prog : stat EOF                     # Program
      ;
 
 // statements
-stat : identifier                   # DeclarationStat
-     | assignLHS '=' assignRHS      # AssignStat
+stat : variable '=' expression      # AssignStat
      | stat ';' stat                # SequenceStat
      ;
 
-// assignments
-assignLHS : identifier ;
-assignRHS : expr       ;
-
 // expressions
-expr : literal                      # LiteralExpr
-     | identifier                   # VariableExpr
-     | unaryOp expr                 # UnaryOpExpr
-     | expr op=('*'|'/'|'%') expr   # MulDivModExpr
-     | expr op=('+'|'-')  expr      # AddSubExpr
-     | '(' expr ')'                 # ParensExpr
-     ;
+expression     : literal                                  # LiteralExpr
+               | variable                                 # VariableExpr
+               | unaryOp expression                       # UnaryOpExpr
+               | expression op=('*'|'/'|'%') expression   # MulDivModExpr
+               | expression op=('+'|'-')  expression      # AddSubExpr
+               | '(' expression ')'                       # ParensExpr
+               ;
 
 unaryOp : NEG ;
 
 literal : ( ADD | NEG )? NAT ;
 
-identifier : IDENT ;
+variable : IDENT ;
