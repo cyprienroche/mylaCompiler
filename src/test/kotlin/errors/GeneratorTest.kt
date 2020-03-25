@@ -23,7 +23,7 @@ class GeneratorTest {
 
     @Test
     internal fun validDeclarationAddsNoError() {
-        parseTree("valid", "declaration")
+        parseTree("valid", "assignExpr")
         BuildSyntaxError(listener, never()).verify()
     }
 
