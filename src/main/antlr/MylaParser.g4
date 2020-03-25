@@ -14,21 +14,17 @@ stat : variable '=' expression      # AssignStat
      | stat ';' stat                # SequenceStat
      ;
 
-// assignments
-variable   : identifier          ;
-expression : arithmeticExpr      ;
-
 // expressions
-arithmeticExpr : literal                                          # LiteralExpr
-               | identifier                                       # VariableExpr
-               | unaryOp arithmeticExpr                           # UnaryOpExpr
-               | arithmeticExpr op=('*'|'/'|'%') arithmeticExpr   # MulDivModExpr
-               | arithmeticExpr op=('+'|'-')  arithmeticExpr      # AddSubExpr
-               | '(' arithmeticExpr ')'                           # ParensExpr
+expression     : literal                                  # LiteralExpr
+               | variable                                 # VariableExpr
+               | unaryOp expression                       # UnaryOpExpr
+               | expression op=('*'|'/'|'%') expression   # MulDivModExpr
+               | expression op=('+'|'-')  expression      # AddSubExpr
+               | '(' expression ')'                       # ParensExpr
                ;
 
 unaryOp : NEG ;
 
 literal : ( ADD | NEG )? NAT ;
 
-identifier : IDENT ;
+variable : IDENT ;
