@@ -11,22 +11,22 @@ prog : stat EOF                     # Program
 
 // statements
 stat : identifier                   # DeclarationStat
-     | assignLHS '=' assignRHS      # AssignStat
+     | variable '=' expression      # AssignStat
      | stat ';' stat                # SequenceStat
      ;
 
 // assignments
-assignLHS : identifier ;
-assignRHS : expr       ;
+variable   : identifier ;
+expression : arithmeticExpr      ;
 
 // expressions
-expr : literal                      # LiteralExpr
-     | identifier                   # VariableExpr
-     | unaryOp expr                 # UnaryOpExpr
-     | expr op=('*'|'/'|'%') expr   # MulDivModExpr
-     | expr op=('+'|'-')  expr      # AddSubExpr
-     | '(' expr ')'                 # ParensExpr
-     ;
+arithmeticExpr : literal                                          # LiteralExpr
+               | identifier                                       # VariableExpr
+               | unaryOp arithmeticExpr                           # UnaryOpExpr
+               | arithmeticExpr op=('*'|'/'|'%') arithmeticExpr   # MulDivModExpr
+               | arithmeticExpr op=('+'|'-')  arithmeticExpr      # AddSubExpr
+               | '(' arithmeticExpr ')'                           # ParensExpr
+               ;
 
 unaryOp : NEG ;
 
