@@ -1,9 +1,9 @@
 package visitor
 
-import ast.Arithmetic
 import ast.AssignmentTree
-import ast.Identifier
 import ast.StatementTree
+import ast.assignments.Arithmetic
+import ast.assignments.Identifier
 import generated.MylaParser
 import generated.MylaParserBaseVisitor
 

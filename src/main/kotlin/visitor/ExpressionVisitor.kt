@@ -1,7 +1,7 @@
 package visitor
 
-import ast.Expression
+import ast.assignments.ExpressionTree
 import generated.MylaParserBaseVisitor
 
 /* arithmeticExpr */
-class ExpressionVisitor : MylaParserBaseVisitor<Expression>()
+class ExpressionVisitor : MylaParserBaseVisitor<ExpressionTree>()

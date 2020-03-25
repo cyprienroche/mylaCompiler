@@ -1,9 +1,9 @@
 package visitor
 
-import ast.Arithmetic
 import ast.AssignmentTree
-import ast.Identifier
 import ast.StatementTree
+import ast.assignments.Arithmetic
+import ast.assignments.Identifier
 import com.nhaarman.mockitokotlin2.mock
 import generateParser
 import generated.MylaParser

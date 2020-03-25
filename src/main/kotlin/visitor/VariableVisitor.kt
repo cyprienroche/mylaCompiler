@@ -1,7 +1,7 @@
 package visitor
 
-import ast.Variable
+import ast.assignments.VariableTree
 import generated.MylaParserBaseVisitor
 
 /* identifier */
-class VariableVisitor : MylaParserBaseVisitor<Variable>()
+class VariableVisitor : MylaParserBaseVisitor<VariableTree>()
