@@ -27,14 +27,14 @@ class ParserTest {
         @ValueSource(strings = ["1 + \n 1", "(2--3)", "1 * (3 + 2)", "+2-3*4/(+33+ \r - -3 + \t 10 ++5)"])
         fun validExpression(input: String) {
             val mock = MockParser(input)
-            mock.parseArithmeticExpression().verifyValid()
+            mock.parseExpression().verifyValid()
         }
 
         @ParameterizedTest
         @ValueSource(strings = ["1 (2)", "x = 1", "+-10", "6+*4", "0invalid", "0 + "])
         fun invalidExpression(input: String) {
             val mock = MockParser(input)
-            mock.parseArithmeticExpression().verifyInvalid()
+            mock.parseExpression().verifyInvalid()
         }
     }
 

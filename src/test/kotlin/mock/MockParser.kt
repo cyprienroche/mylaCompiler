@@ -23,8 +23,8 @@ class MockParser(private val input: String) {
         return this
     }
 
-    fun parseArithmeticExpression(): MockParser {
-        parser.arithmeticExpr()
+    fun parseExpression(): MockParser {
+        parser.expression()
         errorIfEntireInputNotParsed()
         return this
     }
