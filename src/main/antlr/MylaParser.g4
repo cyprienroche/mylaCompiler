@@ -10,13 +10,12 @@ prog : stat EOF                     # Program
      ;
 
 // statements
-stat : identifier                   # DeclarationStat
-     | variable '=' expression      # AssignStat
+stat : variable '=' expression      # AssignStat
      | stat ';' stat                # SequenceStat
      ;
 
 // assignments
-variable   : identifier ;
+variable   : identifier          ;
 expression : arithmeticExpr      ;
 
 // expressions
