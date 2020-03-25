@@ -1,3 +1,3 @@
-package ast
+package ast.assignments
 
-interface Expression
+interface ExpressionTree

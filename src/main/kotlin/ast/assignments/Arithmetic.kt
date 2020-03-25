@@ -1,3 +1,3 @@
-package ast
+package ast.assignments
 
-object Arithmetic : Expression
+object Arithmetic : ExpressionTree

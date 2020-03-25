@@ -1,3 +1,3 @@
-package ast
+package ast.assignments
 
-object Identifier : Variable
+object Identifier : VariableTree
