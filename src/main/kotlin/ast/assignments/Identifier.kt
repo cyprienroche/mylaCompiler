@@ -1,3 +1,3 @@
 package ast.assignments
 
-object Identifier : VariableTree
+object Identifier : VariableTree, ExpressionTree
