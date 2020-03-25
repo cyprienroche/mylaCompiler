@@ -18,13 +18,13 @@ class MockParser(private val input: String) {
     }
 
     fun parseAssignLHS(): MockParser {
-        parser.assignLHS()
+        parser.variable()
         errorIfEntireInputNotParsed()
         return this
     }
 
-    fun parseExpression(): MockParser {
-        parser.expr()
+    fun parseArithmeticExpression(): MockParser {
+        parser.arithmeticExpr()
         errorIfEntireInputNotParsed()
         return this
     }
