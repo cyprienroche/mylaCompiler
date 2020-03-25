@@ -1,5 +1,8 @@
 package visitor
 
+import ast.Arithmetic
+import ast.AssignmentTree
+import ast.Identifier
 import ast.StatementTree
 import com.nhaarman.mockitokotlin2.mock
 import generateParser
@@ -24,7 +27,7 @@ class StatementTreeVisitorTest {
     @Test
     internal fun canVisitBasicStatement() {
         val statementParseTree = parseTree("assign")
-        val expected = emptyList<StatementTree>()
+        val expected = listOf<StatementTree>(AssignmentTree(Identifier, Arithmetic))
         assertThat(statementVisitor.visit(statementParseTree), `is`(expected))
     }
 }

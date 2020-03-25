@@ -1,5 +1,8 @@
 package visitor
 
+import ast.Arithmetic
+import ast.AssignmentTree
+import ast.Identifier
 import ast.ProgramTree
 import com.nhaarman.mockitokotlin2.mock
 import generateProgramParseTree
@@ -19,7 +22,7 @@ class ProgramTreeVisitorTest {
     @Test
     internal fun canVisitBasicProgram() {
         val programParseTree = parseTree("assign")
-        val expected = ProgramTree(emptyList())
+        val expected = ProgramTree(listOf(AssignmentTree(Identifier, Arithmetic)))
         assertThat(programVisitor.visit(programParseTree), `is`(expected))
     }
 }
