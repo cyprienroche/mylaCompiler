@@ -2,8 +2,8 @@ package visitor
 
 import ast.AssignmentTree
 import ast.StatementTree
-import ast.assignments.Arithmetic
 import ast.assignments.Identifier
+import ast.assignments.Literal
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
@@ -16,7 +16,7 @@ class StatementTreeVisitorTest {
     @Test
     internal fun canVisitBasicStatement() {
         val statementParseTree = parseTree("assign").stat()
-        val expected = listOf<StatementTree>(AssignmentTree(Identifier, Arithmetic))
+        val expected = listOf<StatementTree>(AssignmentTree(Identifier, Literal))
         assertThat(statementVisitor.visit(statementParseTree), `is`(expected))
     }
 }

@@ -1,8 +1,8 @@
 package visitor
 
-import ast.assignments.Arithmetic
 import ast.assignments.ExpressionTree
 import ast.assignments.Identifier
+import ast.assignments.Literal
 import generated.MylaParser
 import generated.MylaParserBaseVisitor
 
@@ -10,7 +10,7 @@ import generated.MylaParserBaseVisitor
 class ExpressionTreeVisitor : MylaParserBaseVisitor<ExpressionTree>() {
 
     override fun visitLiteral(ctx: MylaParser.LiteralContext): ExpressionTree {
-        return Arithmetic
+        return Literal
     }
 
     override fun visitVariable(ctx: MylaParser.VariableContext): ExpressionTree {
