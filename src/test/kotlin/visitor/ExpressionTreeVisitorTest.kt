@@ -21,7 +21,7 @@ class ExpressionTreeVisitorTest {
         assertThat(expressionVisitor.visit(expressionVariable), `is`(expectedVariable))
 
         val expressionLiteral = parser.expression()
-        val expectedLiteral: ExpressionTree = Literal
+        val expectedLiteral: ExpressionTree = Literal(73)
         assertThat(expressionVisitor.visit(expressionLiteral), `is`(expectedLiteral))
     }
 }

@@ -16,7 +16,7 @@ class StatementTreeVisitorTest {
     @Test
     internal fun canVisitBasicStatement() {
         val statementParseTree = parseTree("assign").stat()
-        val expected = listOf<StatementTree>(AssignmentTree(Identifier("x"), Literal))
+        val expected = listOf<StatementTree>(AssignmentTree(Identifier("x"), Literal(73)))
         assertThat(statementVisitor.visit(statementParseTree), `is`(expected))
     }
 }
