@@ -7,6 +7,7 @@ import generated.MylaParserBaseVisitor
 
 /* prog */
 class ProgramTreeVisitor : MylaParserBaseVisitor<ProgramTree>() {
+
     /* stat EOF */
     override fun visitProgram(ctx: MylaParser.ProgramContext): ProgramTree {
         return ProgramTree(visitMain(ctx))

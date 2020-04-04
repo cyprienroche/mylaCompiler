@@ -8,12 +8,12 @@ import generated.MylaParserBaseVisitor
 class ExpressionTreeVisitor : MylaParserBaseVisitor<ExpressionTree>() {
 
     /* literal */
-    override fun visitLiteral(ctx: MylaParser.LiteralContext): ExpressionTree {
+    override fun visitLiteralExpr(ctx: MylaParser.LiteralExprContext): ExpressionTree {
         return ctx.accept(LiteralTreeVisitor())
     }
 
     /* variable */
-    override fun visitVariable(ctx: MylaParser.VariableContext): ExpressionTree {
+    override fun visitVariableExpr(ctx: MylaParser.VariableExprContext): ExpressionTree {
         return ctx.accept(VariableTreeVisitor())
     }
 }
