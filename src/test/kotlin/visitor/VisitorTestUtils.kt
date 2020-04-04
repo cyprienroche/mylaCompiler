@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.CharStreams
 class VisitorTestUtils {
     companion object {
         private val listener = mock<ANTLRErrorListener> {}
-        private val validProgramPath = "src/test/resources/valid"
+        private const val validProgramPath = "src/test/resources/valid"
 
         fun parseTree(fileName: String): MylaParser =
             generateParser(CharStreams.fromFileName("$validProgramPath/$fileName.myla"), listener)
