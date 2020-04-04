@@ -1,3 +1,3 @@
 package ast.assignments
 
-interface VariableTree
+interface VariableTree : ExpressionTree
