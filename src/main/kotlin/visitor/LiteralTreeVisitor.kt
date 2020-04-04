@@ -1,14 +1,21 @@
 package visitor
 
 import ast.assignments.Literal
+import generated.MylaParser
 import generated.MylaParserBaseVisitor
-import org.antlr.v4.runtime.tree.TerminalNode
 
 /* literal */
 class LiteralTreeVisitor : MylaParserBaseVisitor<Literal>() {
 
     /* ( ADD | NEG )? NAT */
-    override fun visitTerminal(node: TerminalNode): Literal {
-        return Literal(node.text.toInt())
+    override fun visitIntLiteral(ctx: MylaParser.IntLiteralContext): Literal {
+        return Literal(ctx.toInt())
+    }
+
+    /* ( ADD | NEG )? NAT */
+    private fun MylaParser.IntLiteralContext.toInt(): Int {
+        val value = this.NAT().text.toInt()
+        val sign = if (this.NEG() == null) 1 else -1
+        return sign * value
     }
 }
