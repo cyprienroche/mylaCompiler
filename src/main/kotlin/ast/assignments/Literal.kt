@@ -1,3 +1,3 @@
 package ast.assignments
 
-object Literal : ExpressionTree
+data class Literal(val value: Int) : ExpressionTree
