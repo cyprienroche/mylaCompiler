@@ -6,7 +6,7 @@ import ast.assignments.Literal
 import generated.MylaParser
 import generated.MylaParserBaseVisitor
 
-/* arithmeticExpr */
+/* expression */
 class ExpressionTreeVisitor : MylaParserBaseVisitor<ExpressionTree>() {
 
     override fun visitLiteral(ctx: MylaParser.LiteralContext): ExpressionTree {
