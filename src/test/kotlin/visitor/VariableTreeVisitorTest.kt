@@ -14,7 +14,7 @@ class VariableTreeVisitorTest {
     @Test
     internal fun canVisitBasicStatement() {
         val expressionVariable = parseTree("assign").variable()
-        val expectedVariable: VariableTree = Identifier
+        val expectedVariable: VariableTree = Identifier("x")
         assertThat(variableVisitor.visit(expressionVariable), `is`(expectedVariable))
     }
 }

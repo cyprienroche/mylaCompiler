@@ -16,7 +16,7 @@ class ProgramTreeVisitorTest {
     @Test
     internal fun canVisitBasicProgram() {
         val programParseTree = parseTree("assign").prog()
-        val expected = ProgramTree(listOf(AssignmentTree(Identifier, Literal)))
+        val expected = ProgramTree(listOf(AssignmentTree(Identifier("x"), Literal)))
         assertThat(programVisitor.visit(programParseTree), `is`(expected))
     }
 }

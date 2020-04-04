@@ -1,3 +1,3 @@
 package ast.assignments
 
-object Identifier : VariableTree
+data class Identifier(val name: String) : VariableTree
