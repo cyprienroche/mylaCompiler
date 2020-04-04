@@ -6,25 +6,26 @@ options {
 }
 
 // program
-prog : stat EOF                     # Program
+prog : stat EOF  # Program
      ;
 
 // statements
-stat : variable '=' expression      # AssignStat
-     | stat ';' stat                # SequenceStat
+stat : variable '=' expression  # AssignStat
+     | stat ';' stat            # SequenceStat
      ;
 
 // expressions
-expression     : literal                                  # LiteralExpr
-               | variable                                 # VariableExpr
-               | unaryOp expression                       # UnaryOpExpr
-               | expression op=('*'|'/'|'%') expression   # MulDivModExpr
-               | expression op=('+'|'-')  expression      # AddSubExpr
-               | '(' expression ')'                       # ParensExpr
+expression     : literal                                 # LiteralExpr
+               | variable                                # VariableExpr
+               | unaryOp expression                      # UnaryOpExpr
+               | expression op=('*'|'/'|'%') expression  # MulDivModExpr
+               | expression op=('+'|'-')  expression     # AddSubExpr
+               | '(' expression ')'                      # ParensExpr
                ;
 
 unaryOp : NEG ;
 
-literal : ( ADD | NEG )? NAT ;
+literal : ( ADD | NEG )? NAT  # IntLiteral
+        ;
 
 variable : IDENT ;

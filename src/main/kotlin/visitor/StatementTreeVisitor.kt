@@ -5,6 +5,7 @@ import ast.StatementTree
 import generated.MylaParser
 import generated.MylaParserBaseVisitor
 
+/* stat */
 class StatementTreeVisitor : MylaParserBaseVisitor<List<StatementTree>>() {
 
     /* variable '=' expression */

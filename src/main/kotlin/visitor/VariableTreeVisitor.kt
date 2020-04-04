@@ -7,7 +7,9 @@ import generated.MylaParserBaseVisitor
 
 /* identifier */
 class VariableTreeVisitor : MylaParserBaseVisitor<VariableTree>() {
+
+    /* IDENT */
     override fun visitVariable(ctx: MylaParser.VariableContext): VariableTree {
-        return Identifier
+        return Identifier(ctx.text)
     }
 }
